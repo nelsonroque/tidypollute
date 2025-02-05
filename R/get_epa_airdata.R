@@ -1,0 +1,93 @@
+#' Download EPA Air Quality Data (EPA AirData Flat Files)
+#'
+#' @description
+#' Downloads and stacks EPA air quality data for specified parameters with progress tracking.
+#'
+#' @param analyte Character string specifying the EPA analyte code (e.g., "88101" for PM2.5)
+#' @param start_year Numeric value for the starting year of data collection
+#' @param end_year Numeric value for the ending year of data collection
+#' @param unit Character string specifying the unit of analysis (e.g., "daily")
+#' @param output_dir Character string specifying the directory for downloaded files.
+#'   Defaults to "data/"
+#'
+#' @return A data frame containing the stacked EPA air quality data or NULL if no data
+#'   is found or download is cancelled
+#'
+#' @details
+#' The function includes interactive confirmation before downloading and displays a
+#' progress bar during the download process. It will create the output directory if
+#' it doesn't exist.
+#'
+#' @examples
+#' \dontrun{
+#' # Download PM2.5 data
+#' pm25_data <- get_epa_data(
+#'   analyte = "88101",
+#'   start_year = 2020,
+#'   end_year = 2023,
+#'   unit = "daily",
+#'   output_dir = "path/to/my/data/"
+#' )
+#' }
+#'
+#' @importFrom dplyr filter
+#' @importFrom progress progress_bar
+#' @importFrom tidypollute download_stack_epa_airdata
+#'
+#' @export
+get_epa_airdata <- function(analyte, start_year, end_year, unit, output_dir = "data/") {
+  if (missing(analyte) || missing(start_year) || missing(end_year) || missing(unit)) {
+    stop("All parameters must be specified: analyte, start_year, end_year, and unit")
+  }
+
+  # Validate and create output directory if it doesn't exist
+  if (!dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE)
+    message(sprintf("Created output directory: %s", output_dir))
+  }
+
+  # Scrape fresh data links instead of using epa_zip_links
+  zip_links <- tidypollute::scrape_epa_airdata_zip_links()
+
+  # Get the data links for specified analyte and years
+  data_links <- zip_links %>%
+    filter(analyte == !!analyte,
+           unit_of_analysis == unit,
+           year >= start_year & year <= end_year)
+
+  if (nrow(data_links) == 0) {
+    message("No data found for the specified parameters.")
+    return(NULL)
+  }
+
+  cat("\nPreparing to download:\n")
+  cat("Analyte:", analyte, "\n")
+  cat("Years:", start_year, "to", end_year, "\n")
+  cat("Number of files:", nrow(data_links), "\n")
+  cat("Unit of analysis:", unit, "\n")
+  cat("Output directory:", output_dir, "\n\n")
+
+  response <- readline(prompt = "Do you want to proceed with the download? (y/n): ")
+  if (tolower(response) != "y") {
+    message("Download cancelled by user.")
+    return(NULL)
+  }
+
+  pb <- progress_bar$new(
+    format = "Downloading [:bar] :percent eta: :eta",
+    total = nrow(data_links),
+    clear = FALSE,
+    width = 60
+  )
+
+  # Download data with progress tracking
+  epa_data <- data_links %>%
+    tidypollute::download_stack_epa_airdata(download = TRUE,
+                                            stack = TRUE,
+                                            output_dir = output_dir)
+
+  pb$tick(nrow(data_links))
+
+  message("\nDownload complete!")
+  return(epa_data)
+}

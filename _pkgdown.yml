@@ -1,0 +1,4 @@
+light-switch: true
+
+template:
+  bootstrap: 5

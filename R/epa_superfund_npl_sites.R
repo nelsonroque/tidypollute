@@ -1,0 +1,30 @@
+#' EPA Superfund NPL Sites Data
+#'
+#' This dataset contains information on Superfund National Priorities List (NPL) sites as maintained by the U.S. Environmental Protection Agency (EPA). It includes site names, locations, EPA identifiers, status, and links to official EPA records.
+#'
+#' @format A data frame with the following columns:
+#' \describe{
+#'   \item{site_name}{Character. Name of the Superfund site.}
+#'   \item{site_score}{Numeric. EPA's hazard ranking system score for the site.}
+#'   \item{site_epa_id}{Character. Unique EPA identifier for the site.}
+#'   \item{sems_id}{Numeric. SEMS (Superfund Enterprise Management System) identifier.}
+#'   \item{sits_id}{Numeric. Internal site tracking ID.}
+#'   \item{region_id}{Numeric. EPA region where the site is located.}
+#'   \item{state}{Character. U.S. state where the site is located.}
+#'   \item{city}{Character. City or municipality of the site.}
+#'   \item{county}{Character. County where the site is located.}
+#'   \item{status}{Character. The current status of the site (e.g., NPL Site, Deleted NPL Site).}
+#'   \item{deletion_date}{Character. Date when the site was removed from the NPL (if applicable).}
+#'   \item{site_listing_narrative}{Character. HTML-formatted description of the site from the EPA database.}
+#'   \item{site_progress_profile}{Character. URL link to the site progress profile.}
+#'   \item{notice_of_data_availability}{Character. Notice related to site data availability.}
+#'   \item{proposed_fr_notice}{Character. Federal Register notice link for proposed listing.}
+#'   \item{deletion_fr_notice}{Character. Federal Register notice link for deletion.}
+#'   \item{final_fr_notice}{Character. Federal Register notice link for final listing.}
+#'   \item{noid_fr_notice}{Character. Federal Register notice for Notice of Intent to Delete.}
+#'   \item{restoration_fr_notice_jumper_pa}{Character. Link to restoration-related notices.}
+#'   \item{site_has_had_a_partial_deletion}{Character. Indicates if the site has had partial deletion (Yes/No).}
+#' }
+#'
+#' @source U.S. Environmental Protection Agency (EPA) Superfund Data
+"epa_superfund_npl_sites"
