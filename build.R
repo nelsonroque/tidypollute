@@ -25,7 +25,7 @@ devtools::check()
 devtools::test()
 
 # 6. Build Package (Creates the .tar.gz package file)
-devtools::build()
+#devtools::build()
 
 # 7. Install Package (Installs the package locally)
 devtools::install()
