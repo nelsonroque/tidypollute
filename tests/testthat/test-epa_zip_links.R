@@ -1,5 +1,4 @@
 library(testthat)
-library(digest)
 library(tidypollute)  # Replace with your actual package name
 
 data(epa_airdata_links)  # Load the dataset once to avoid redundancy
@@ -7,7 +6,7 @@ data(epa_airdata_links)  # Load the dataset once to avoid redundancy
 # Test 1: MD5 hash check
 test_that("epa_airdata_links dataset matches expected MD5 hash", {
   expected_md5 <- "635d2b50e2adee412e7d4eb2a1b6175b"  # Replace with the actual MD5 hash
-  computed_md5 <- digest(epa_airdata_links, algo = "md5")
+  computed_md5 <- digest::digest(epa_airdata_links, algo = "md5")
   expect_equal(computed_md5, expected_md5,
                info = "The dataset has changed unexpectedly. Check for unintended modifications.")
 })

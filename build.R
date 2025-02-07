@@ -2,61 +2,57 @@
 # Versioning
 # ----------------------------
 
-# 1. Increment Package Version (Change to "major", "minor", or "patch" as needed)
-usethis::use_version("patch")
+run_build <- function(version_type = "patch", skip_spell_check = FALSE, skip_site_build = FALSE) {
 
-# -------------------------------
-# R Package Build & Validation
-# -------------------------------
+  # Ensure necessary packages are installed
+  required_pkgs <- c("usethis", "devtools", "pkgdown")
+  for (pkg in required_pkgs) {
+    if (!requireNamespace(pkg, quietly = TRUE)) {
+      stop(paste("Package", pkg, "is not installed. Please install it first."))
+    }
+  }
 
-# 2. Generate Documentation (Updates roxygen2-generated docs)
-#devtools::document()
+  # Commmit to Github
+  message("🔄 Committing and pushing changes to Git...")
+  system("git add .")
+  system("git commit -m 'Auto-update before build'")
+  #system("git push")
 
-# 3. Spell Check (Check for typos in documentation and code comments)
-devtools::spell_check()
+  # Increment package version
+  message("📌 Incrementing package version...")
+  Sys.setenv("usethis.quiet" = "TRUE")  # Suppress confirmation prompts
+  usethis::use_version(version_type)
 
-# run custom cleaning
-# remove all from vignettes data folder
+  # Build package
+  message("📖 Generating documentation...")
+  devtools::document()
 
-# 4. Run Package Checks (Ensures code quality, runs tests, and checks dependencies)
-devtools::check()
+  if (!skip_spell_check) {
+    message("🔍 Running spell check...")
+    devtools::spell_check()
+  } else {
+    message("⏩ Skipping spell check...")
+  }
 
-# 5. Run Tests (Ensures that all test cases pass)
-devtools::test()
+  message("✅ Running package checks...")
+  devtools::check()
 
-# 6. Build Package (Creates the .tar.gz package file)
-#devtools::build()
+  if (!skip_site_build) {
+    message("🌍 Building pkgdown site...")
+    pkgdown::build_site(preview = TRUE)
+  } else {
+    message("⏩ Skipping site build...")
+  }
 
-# 7. Install Package (Installs the package locally)
-devtools::install()
+  message("🎉 Build process complete!")
+}
 
-# -----------------------------------
-# Platform & Cross-Compatibility Checks
-# -----------------------------------
+# run build -----
+run_build()
 
-# 8. Check on Windows (Runs package checks on CRAN’s Windows build system)
-devtools::check_win_release()
-
-# 9. Run R-hub Checks (Optional: Uncomment if needed for cross-platform testing)
-# rhub::rhub_setup()
-# rhub::check()
-
-# -----------------------------------
-# Package Documentation & Website
-# -----------------------------------
-
-# 10. Build the pkgdown Website (Generates documentation site)
-pkgdown::build_site(preview=TRUE)
-
-# ----------------------------
-# CRAN Submission & GitHub Setup
-# ----------------------------
-
-# 12. Set up GitHub Actions to automatically run tests when pushing changes:
-usethis::use_github_action_check_standard()
-
-# 13. Submit to CRAN (Runs final checks and submits package)
-#devtools::release()
+# Submit to CRAN -----
+## Runs final checks and submits package)
+# devtools::release()
 
 # NOTES FOR `paper.md` -----
 # https://joss.readthedocs.io/en/latest/paper.html#what-should-my-paper-contain

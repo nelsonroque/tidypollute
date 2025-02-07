@@ -6,7 +6,7 @@
 #' @param analyte Character string specifying the EPA analyte code (e.g., "88101" for PM2.5)
 #' @param start_year Numeric value for the starting year of data collection
 #' @param end_year Numeric value for the ending year of data collection
-#' @param unit Character string specifying the unit of analysis (e.g., "daily")
+#' @param freq Character string specifying the frequency of analysis (e.g., "daily", "hourly", "annual")
 #' @param output_dir Character string specifying the directory for downloaded files.
 #'   Defaults to "data/"
 #'
@@ -25,7 +25,7 @@
 #'   analyte = "88101",
 #'   start_year = 2020,
 #'   end_year = 2023,
-#'   unit = "daily",
+#'   freq = "daily",
 #'   output_dir = "path/to/my/data/"
 #' )
 #' }
@@ -35,9 +35,9 @@
 #' @importFrom tidypollute download_stack_epa_airdata
 #'
 #' @export
-get_epa_airdata <- function(analyte, start_year, end_year, unit, output_dir = "data/") {
-  if (missing(analyte) || missing(start_year) || missing(end_year) || missing(unit)) {
-    stop("All parameters must be specified: analyte, start_year, end_year, and unit")
+get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "data/", prompt_download=F) {
+  if (missing(analyte) || missing(start_year) || missing(end_year) || missing(freq)) {
+    stop("All parameters must be specified: analyte, start_year, end_year, and freq")
   }
 
   # Validate and create output directory if it doesn't exist
@@ -52,7 +52,7 @@ get_epa_airdata <- function(analyte, start_year, end_year, unit, output_dir = "d
   # Get the data links for specified analyte and years
   data_links <- zip_links %>%
     filter(analyte == !!analyte,
-           unit_of_analysis == unit,
+           unit_of_analysis == !!freq,
            year >= start_year & year <= end_year)
 
   if (nrow(data_links) == 0) {
@@ -64,13 +64,18 @@ get_epa_airdata <- function(analyte, start_year, end_year, unit, output_dir = "d
   cat("Analyte:", analyte, "\n")
   cat("Years:", start_year, "to", end_year, "\n")
   cat("Number of files:", nrow(data_links), "\n")
-  cat("Unit of analysis:", unit, "\n")
+  cat("Freq of data:", freq, "\n")
   cat("Output directory:", output_dir, "\n\n")
 
-  response <- readline(prompt = "Do you want to proceed with the download? (y/n): ")
-  if (tolower(response) != "y") {
-    message("Download cancelled by user.")
-    return(NULL)
+  if(!prompt_download) {
+    message("Proceeding with download...")
+  } else {
+    message("Please review the download details before proceeding.")
+    response <- readline(prompt = "Do you want to proceed with the download? (y/n): ")
+    if (tolower(response) != "y") {
+      message("Download cancelled by user.")
+      return(NULL)
+    }
   }
 
   pb <- progress_bar$new(

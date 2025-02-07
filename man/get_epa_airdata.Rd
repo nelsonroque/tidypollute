@@ -4,7 +4,14 @@
 \alias{get_epa_airdata}
 \title{Download EPA Air Quality Data (EPA AirData Flat Files)}
 \usage{
-get_epa_airdata(analyte, start_year, end_year, unit, output_dir = "data/")
+get_epa_airdata(
+  analyte,
+  start_year,
+  end_year,
+  freq,
+  output_dir = "data/",
+  prompt_download = F
+)
 }
 \arguments{
 \item{analyte}{Character string specifying the EPA analyte code (e.g., "88101" for PM2.5)}
@@ -13,7 +20,7 @@ get_epa_airdata(analyte, start_year, end_year, unit, output_dir = "data/")
 
 \item{end_year}{Numeric value for the ending year of data collection}
 
-\item{unit}{Character string specifying the unit of analysis (e.g., "daily")}
+\item{freq}{Character string specifying the frequency of analysis (e.g., "daily", "hourly", "annual")}
 
 \item{output_dir}{Character string specifying the directory for downloaded files.
 Defaults to "data/"}
@@ -37,7 +44,7 @@ pm25_data <- get_epa_data(
   analyte = "88101",
   start_year = 2020,
   end_year = 2023,
-  unit = "daily",
+  freq = "daily",
   output_dir = "path/to/my/data/"
 )
 }
