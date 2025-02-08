@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,21 +184,65 @@ data:</p>
 </tbody>
 </table>
 <div class="section level4">
-<h4 id="example-fetching-a-limited-dataset">Example: Fetching a Limited Dataset<a class="anchor" aria-label="anchor" href="#example-fetching-a-limited-dataset"></a>
+<h4 id="example-fetching-a-limited-dataset-for-a-single-device">Example: Fetching a Limited Dataset for a Single Device<a class="anchor" aria-label="anchor" href="#example-fetching-a-limited-dataset-for-a-single-device"></a>
 </h4>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">small_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_atmotube_data.html">get_atmotube_data</a></span><span class="op">(</span><span class="va">api_key</span>, <span class="va">mac</span>, <span class="va">start_date</span>, <span class="va">end_date</span>, limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">small_data</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level4">
+<h4 id="example-fetching-large-intervals-of-data-more-than-7-days-for-a-single-device">Example: Fetching Large Intervals of Data (more than 7 days) for a
+Single Device<a class="anchor" aria-label="anchor" href="#example-fetching-large-intervals-of-data-more-than-7-days-for-a-single-device"></a>
+</h4>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">api_key</span> <span class="op">&lt;-</span> <span class="st">"your_api_key_here"</span></span>
+<span><span class="va">mac</span> <span class="op">&lt;-</span> <span class="st">"aa:bb:cc:dd:ee:ff"</span></span>
+<span><span class="va">start_date</span> <span class="op">&lt;-</span> <span class="st">"2024-06-01"</span></span>
+<span><span class="va">end_date</span> <span class="op">&lt;-</span> <span class="st">"2024-07-01"</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_atmotube_data_bulk.html">get_atmotube_data_bulk</a></span><span class="op">(</span><span class="va">api_key</span>, <span class="va">mac</span>, <span class="va">start_date</span>, <span class="va">end_date</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="example-fetching-data-for-multiple-devices-across-large-intervals">Example: Fetching Data for Multiple Devices, Across Large
+Intervals<a class="anchor" aria-label="anchor" href="#example-fetching-data-for-multiple-devices-across-large-intervals"></a>
+</h4>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Example table with multiple Atmotube devices &amp; date ranges</span></span>
+<span><span class="va">mac_table</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  mac <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"aa:bb:cc:dd:ee:ff"</span>, <span class="st">"11:22:33:44:55:66"</span><span class="op">)</span>,</span>
+<span>  start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-06-01"</span>, <span class="st">"2024-06-10"</span><span class="op">)</span>,</span>
+<span>  end_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2024-07-01"</span>, <span class="st">"2024-07-05"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Your Atmotube API Key</span></span>
+<span><span class="va">api_key</span> <span class="op">&lt;-</span> <span class="st">"your_api_key_here"</span></span>
+<span></span>
+<span><span class="co"># Fetch data and unnest results into a long format</span></span>
+<span><span class="va">results_df</span> <span class="op">&lt;-</span> <span class="va">mac_table</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_atmotube_data_bulk.html">get_atmotube_data_bulk</a></span><span class="op">(</span><span class="va">api_key</span>, <span class="va">mac</span>, <span class="va">start_date</span>, <span class="va">end_date</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>  <span class="co"># Expands lists into rows</span></span>
+<span></span>
+<span><span class="co"># View tidy output</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results_df</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="error-handling">Error Handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
 </h3>
-<p>The function automatically checks for: - Invalid API parameters -
-Improper MAC address formatting - Out-of-range values for
-<code>limit</code>, <code>offset</code>, etc.</p>
+<p>The function automatically checks for: - Invalid API parameters</p>
+<ul>
+<li><p>Improper MAC address formatting</p></li>
+<li><p>Out-of-range values for <code>limit</code>, <code>offset</code>,
+etc.</p></li>
+</ul>
 <p>Example of an invalid request:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/get_atmotube_data.html">get_atmotube_data</a></span><span class="op">(</span><span class="va">api_key</span>, <span class="st">"invalid_mac"</span>, <span class="va">start_date</span>, <span class="va">end_date</span><span class="op">)</span></span>
 <span><span class="co"># Error: Invalid 'mac' parameter. Must be in format 'aa:bb:cc:dd:ee:ff'.</span></span></code></pre></div>
 <hr>
@@ -209,19 +253,19 @@ Improper MAC address formatting - Out-of-range values for
 <p>This notebook provides a <strong>simple workflow</strong> for
 retrieving EPA AirData using <code>tidypollute</code>.</p>
 <p>You can:</p>
-<p>✅ Introduces <code><a href="../reference/get_atmotube_data.html">get_atmotube_data()</a></code><br>
-✅ Explains how to install &amp; authenticate<br>
+<p>✅ Introduces <code><a href="../reference/get_atmotube_data.html">get_atmotube_data()</a></code> and
+<code><a href="../reference/get_atmotube_data_bulk.html">get_atmotube_data_bulk()</a></code> ✅ Explains how to install &amp;
+authenticate<br>
 ✅ Provides examples for JSON &amp; CSV<br>
-✅ Shows parameter options with a table<br>
-✅ Includes error handling examples</p>
+✅ Shows parameter options with a table ✅ Includes error handling
+examples</p>
 </div>
 <div class="section level3">
 <h3 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h3>
 <p>This vignette provides a quick guide to fetching air quality data
 using the Atmotube API in R. For further details, refer to the API
-documentation.</p>
-<p>Happy coding! 🚀</p>
+documentation. Happy coding! 🚀</p>
 <p>For more details, check out <a href="https://nelsonroque.github.io/tidypollute/index.html" class="external-link"><code>tidypollute</code>
 documentation</a>.</p>
 </div>

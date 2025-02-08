@@ -136,9 +136,13 @@ This notebook provides a **simple workflow** for retrieving EPA AirData using `t
 You can:
 
 ✅ Introduces `get_atmotube_data()`  and `get_atmotube_data_bulk()`
+
 ✅ Explains how to install & authenticate  
+
 ✅ Provides examples for JSON & CSV  
+
 ✅ Shows parameter options with a table
+
 ✅ Includes error handling examples  
 
 ## Conclusion
