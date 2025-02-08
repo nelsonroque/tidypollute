@@ -10,3 +10,4 @@
 ^examples$               # Ignore example scripts
 ^pkgdown$                # Ignore pkgdown output
 ^tidypollute\.Rproj$     # Ignore RStudio project file
+^CRAN-SUBMISSION$
