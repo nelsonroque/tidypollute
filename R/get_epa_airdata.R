@@ -52,9 +52,9 @@ get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "d
 
   # Get the data links for specified analyte and years
   data_links <- zip_links %>%
-    filter(analyte == !!analyte,
-           unit_of_analysis == !!freq,
-           year >= start_year & year <= end_year)
+    filter(.data$analyte == !!analyte,
+           .data$unit_of_analysis == !!freq,
+           .data$year >= start_year & .data$year <= end_year)
 
   if (nrow(data_links) == 0) {
     message("No data found for the specified parameters.")
