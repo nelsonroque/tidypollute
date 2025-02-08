@@ -20,10 +20,6 @@ affiliations:
    index: 3
 date: 06 February 2025
 bibliography: paper.bib
-vignette: >
-  %\VignetteIndexEntry{tidypollute: An R Package for Working with Environmental Data.}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 # Summary
