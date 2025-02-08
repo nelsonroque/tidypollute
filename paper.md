@@ -42,10 +42,12 @@ For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_cod
 
 There are several datasets hosted inside of this package.
 
-  - The `epa_airdata_monitoring_sites` dataset contains metadata for monitoring sites (as of February 5, 2025).
-  - The `epa_airdata_links` dataset contains links to the most recent flat files, while `epa_airdata_links_archive` contains links to flat files, archived by Archive.org.
+  - The `epa_airdata_monitoring_sites` dataset contains metadata for EPA AirData monitoring sites (as of February 5, 2025).
+  - The `epa_airdata_links` dataset contains links to all pre-generated flat files, while `epa_airdata_links_archive` contains links to flat files, as archived by Archive.org.
   - The `epa_superfund_npl_sites` dataset contains metadata for Superfund sites (as of February 5, 2025).
-  - The `us_states` dataset containing basic metadata about states (e.g., abbreviations, size)
+  - The `us_states` dataset containing basic metadata about states (e.g., abbreviations, size, region)
+
+For help getting started, please 
 
 # Statement of Need
 Air quality is a critical factor influencing public health, yet analyzing EPA AirData can be cumbersome due to the size and complexity of raw datasets. Many existing tools focus on API-based retrieval, but large-scale historical analyses often require working directly with the **flat files** provided by the EPA.  

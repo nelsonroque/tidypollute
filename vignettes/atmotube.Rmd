@@ -1,0 +1,110 @@
+---
+title: "tidypollute: Getting Started with the Atmotube Cloud API"
+author: "Dr. Nelson Roque"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidypollute: Getting Started with the Atmotube Cloud API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Getting Started with `tidypollute`
+
+## Goals of this Notebook
+
+This vignette demonstrates how to use the `get_atmotube_data()` to **download Atmotube data** [via the Atmotube Cloud API](https://app.swaggerhub.com/apis-docs/Atmotube/cloud_api/1.4) using the `tidypollute` package.
+
+## API Authentication
+
+To access the Atmotube API, you need:
+- An **API key** (provided by Atmotube)
+- The **MAC address** of your Atmotube device
+
+Make sure you store your API key securely.
+
+------------------------------------------------------------------------
+
+## Retrieving Data
+
+### Fetching Data in JSON Format
+
+Use `get_atmotube_data()` to retrieve air quality data:
+
+```r
+api_key <- "your_api_key_here"
+mac <- "aa:bb:cc:dd:ee:ff"
+start_date <- "2024-07-17"
+end_date <- "2024-07-17"
+
+data <- get_atmotube_data(api_key, mac, start_date, end_date, format = "json")
+
+# View the structure of the response
+str(data)
+```
+
+### Fetching Data in CSV Format
+
+If you prefer a **CSV** response:
+
+```r
+csv_data <- get_atmotube_data(api_key, mac, start_date, end_date, format = "csv")
+
+# Print first few rows (if using read.csv)
+read.csv(text = csv_data, sep = ";") |> head()
+```
+
+## Parameter Options
+
+The function supports several parameters:
+
+| Parameter   | Description | Default | Valid Values |
+|-------------|------------|---------|-------------|
+| `order`     | Sorting order | `"asc"` | `"asc"`, `"desc"` |
+| `format`    | Response format | `"json"` | `"json"`, `"csv"` |
+| `offset`    | Pagination offset | `0` | `≥0` |
+| `limit`     | Number of records | `1440` | `1-1440` |
+| `separator` | CSV separator | `"semicolon"` | Any delimiter |
+
+### Example: Fetching a Limited Dataset
+
+```r
+small_data <- get_atmotube_data(api_key, mac, start_date, end_date, limit = 10)
+print(small_data)
+```
+
+## Error Handling
+
+The function automatically checks for:
+- Invalid API parameters
+- Improper MAC address formatting
+- Out-of-range values for `limit`, `offset`, etc.
+
+Example of an invalid request:
+
+```r
+get_atmotube_data(api_key, "invalid_mac", start_date, end_date)
+# Error: Invalid 'mac' parameter. Must be in format 'aa:bb:cc:dd:ee:ff'.
+```
+
+
+---
+
+## Summary
+
+This notebook provides a **simple workflow** for retrieving EPA AirData using `tidypollute`.
+
+You can:
+
+✅ Introduces `get_atmotube_data()`  
+✅ Explains how to install & authenticate  
+✅ Provides examples for JSON & CSV  
+✅ Shows parameter options with a table  
+✅ Includes error handling examples  
+
+## Conclusion
+
+This vignette provides a quick guide to fetching air quality data using the Atmotube API in R. For further details, refer to the API documentation.
+
+Happy coding! 🚀
+
+For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).
