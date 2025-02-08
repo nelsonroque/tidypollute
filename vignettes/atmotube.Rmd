@@ -65,18 +65,59 @@ The function supports several parameters:
 | `limit`     | Number of records | `1440` | `1-1440` |
 | `separator` | CSV separator | `"semicolon"` | Any delimiter |
 
-### Example: Fetching a Limited Dataset
+### Example: Fetching a Limited Dataset for a Single Device
 
 ```r
 small_data <- get_atmotube_data(api_key, mac, start_date, end_date, limit = 10)
 print(small_data)
 ```
 
+### Example: Fetching Large Intervals of Data (more than 7 days) for a Single Device
+
+```r
+api_key <- "your_api_key_here"
+mac <- "aa:bb:cc:dd:ee:ff"
+start_date <- "2024-06-01"
+end_date <- "2024-07-01"
+data <- get_atmotube_data_bulk(api_key, mac, start_date, end_date)
+print(data)
+```
+
+### Example: Fetching Data for Multiple Devices, Across Large Intervals
+
+```r
+library(dplyr)
+library(tidyr)
+library(purrr)
+
+# Example table with multiple Atmotube devices & date ranges
+mac_table <- tibble::tibble(
+  mac = c("aa:bb:cc:dd:ee:ff", "11:22:33:44:55:66"),
+  start_date = c("2024-06-01", "2024-06-10"),
+  end_date = c("2024-07-01", "2024-07-05")
+)
+
+# Your Atmotube API Key
+api_key <- "your_api_key_here"
+
+# Fetch data and unnest results into a long format
+results_df <- mac_table %>%
+  rowwise() %>%
+  mutate(data = list(get_atmotube_data_bulk(api_key, mac, start_date, end_date))) %>%
+  ungroup() %>%
+  unnest(data)  # Expands lists into rows
+
+# View tidy output
+print(results_df)
+```
+
 ## Error Handling
 
 The function automatically checks for:
 - Invalid API parameters
+
 - Improper MAC address formatting
+
 - Out-of-range values for `limit`, `offset`, etc.
 
 Example of an invalid request:
@@ -86,7 +127,6 @@ get_atmotube_data(api_key, "invalid_mac", start_date, end_date)
 # Error: Invalid 'mac' parameter. Must be in format 'aa:bb:cc:dd:ee:ff'.
 ```
 
-
 ---
 
 ## Summary
@@ -95,16 +135,14 @@ This notebook provides a **simple workflow** for retrieving EPA AirData using `t
 
 You can:
 
-✅ Introduces `get_atmotube_data()`  
+✅ Introduces `get_atmotube_data()`  and `get_atmotube_data_bulk()`
 ✅ Explains how to install & authenticate  
 ✅ Provides examples for JSON & CSV  
-✅ Shows parameter options with a table  
+✅ Shows parameter options with a table
 ✅ Includes error handling examples  
 
 ## Conclusion
 
-This vignette provides a quick guide to fetching air quality data using the Atmotube API in R. For further details, refer to the API documentation.
-
-Happy coding! 🚀
+This vignette provides a quick guide to fetching air quality data using the Atmotube API in R. For further details, refer to the API documentation. Happy coding! 🚀
 
 For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).
