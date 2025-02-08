@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^.*\.bib$
+^\paper\.md$
 ^\.internal$
 ^\.github$
 ^_pkgdown\.yml$

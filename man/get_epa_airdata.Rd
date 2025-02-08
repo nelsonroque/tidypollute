@@ -24,6 +24,8 @@ get_epa_airdata(
 
 \item{output_dir}{Character string specifying the directory for downloaded files.
 Defaults to "data/"}
+
+\item{prompt_download}{Boolean indicating whether to prompt user before downloading (default: False)}
 }
 \value{
 A data frame containing the stacked EPA air quality data or NULL if no data

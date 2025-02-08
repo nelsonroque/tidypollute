@@ -24,6 +24,13 @@
 #'   \item{noid_fr_notice}{Character. Federal Register notice for Notice of Intent to Delete.}
 #'   \item{restoration_fr_notice_jumper_pa}{Character. Link to restoration-related notices.}
 #'   \item{site_has_had_a_partial_deletion}{Character. Indicates if the site has had partial deletion (Yes/No).}
+#'   \item{construction_completion_date}{Character. Date of construction completion.}
+#'   \item{construction_completion_number}{Numeric. Number assigned for construction completion.}
+#'   \item{latitude}{Numeric. Latitude coordinate of the site.}
+#'   \item{longitude}{Numeric. Longitude coordinate of the site.}
+#'   \item{listing_date}{Character. Date the site was listed on the NPL.}
+#'   \item{noid_date}{Character. Date of Notice of Intent to Delete.}
+#'   \item{proposed_date}{Character. Date when the site was proposed for listing.}
 #' }
 #'
 #' @source U.S. Environmental Protection Agency (EPA) Superfund Data
