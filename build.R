@@ -2,7 +2,9 @@
 # Versioning
 # ----------------------------
 
-run_build <- function(version_type = "patch", skip_spell_check = FALSE, skip_site_build = FALSE) {
+run_build <- function(version_type = "patch",
+                      skip_spell_check = FALSE,
+                      skip_site_build = FALSE) {
 
   # Ensure necessary packages are installed
   required_pkgs <- c("usethis", "devtools", "pkgdown")
