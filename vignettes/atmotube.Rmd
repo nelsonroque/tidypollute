@@ -32,9 +32,9 @@ Use `get_atmotube_data()` to retrieve air quality data:
 
 ```r
 api_key <- "your_api_key_here"
-mac <- "aa:bb:cc:dd:ee:ff"
-start_date <- "2024-07-17"
-end_date <- "2024-07-17"
+mac <- "d3:8e:70:ac:49:68"
+start_date <- "2024-10-20"
+end_date <- "2024-10-27"
 
 data <- get_atmotube_data(api_key, mac, start_date, end_date, format = "json")
 

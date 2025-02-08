@@ -7,6 +7,7 @@
 #' @param start_year Numeric value for the starting year of data collection
 #' @param end_year Numeric value for the ending year of data collection
 #' @param freq Character string specifying the frequency of analysis (e.g., "daily", "hourly", "annual")
+#' @param prompt_download Boolean indicating whether to prompt user before downloading (default: False)
 #' @param output_dir Character string specifying the directory for downloaded files.
 #'   Defaults to "data/"
 #'

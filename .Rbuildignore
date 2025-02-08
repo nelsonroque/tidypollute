@@ -1,6 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^.*\.bib$
 ^\.internal$
+^\.github$
 ^_pkgdown\.yml$
 ^build\.R$
 ^docs$

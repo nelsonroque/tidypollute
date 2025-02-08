@@ -9,8 +9,11 @@ License: GPL-3
 Encoding: UTF-8
 Imports: 
     dplyr, glue, readr, purrr, 
-    stringr, tibble, lubridate, 
-    rvest, httr, httr2, progress, 
+    stringr, tibble, 
+    lubridate, 
+    rvest, 
+    httr, httr2, 
+    progress, 
     janitor, digest
 Suggests:
     extrafont,

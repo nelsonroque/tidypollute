@@ -34,10 +34,10 @@ For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_cod
   - **Automated metadata scraping**: The function `scrape_epa_airdata_zip_links()` gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and `get_epa_airdata_analyte_codes()` to gather the various file types in a handy table (i.e., tibble).
   - **Streamlined bulk downloads**: `download_stack_epa_airdata()` enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named `url` for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.
   - **Built-in EPA dataset archives**: `epa_airdata_links`, `epa_airdata_monitoring_sites` and `epa_superfund_npl_sites`, to name a few!
-  - **Access to Atmotube Cloud API** for sensor data from Atmotube Pro devices.
+  - **Access to Atmotube Cloud API** for sensor data from Atmotube Pro devices from your fleet or research project (API Key required from Atmotube).
 - **Planned Enhancements:**
-  - Integration with real-time API endpoints and additional environmental datasets.
-  - Expansion to support non-U.S. and wearable air quality data sources.
+  - Integration with real-time API endpoints and additional environmental datasets (e.g., water quality).
+  - Expansion to support non-U.S. and other wearable air quality data sources (e.g., Purple Air, Flow2).
   - Visualization tools for spatial and temporal trends.
 
 There are several datasets hosted inside of this package.
@@ -47,7 +47,7 @@ There are several datasets hosted inside of this package.
   - The `epa_superfund_npl_sites` dataset contains metadata for Superfund sites (as of February 5, 2025).
   - The `us_states` dataset containing basic metadata about states (e.g., abbreviations, size, region)
 
-For help getting started, please 
+For help getting started, please see the vignettes included with this package.
 
 # Statement of Need
 Air quality is a critical factor influencing public health, yet analyzing EPA AirData can be cumbersome due to the size and complexity of raw datasets. Many existing tools focus on API-based retrieval, but large-scale historical analyses often require working directly with the **flat files** provided by the EPA.  
