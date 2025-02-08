@@ -1,14 +1,13 @@
-^.*\.Rproj$              # Ignore R project files
-^\.Rproj\.user$          # Ignore RStudio project user files
-^.*\.bib$                # Ignore bibliography files
-^paper\.md$              # Ignore paper draft files
-^_pkgdown\.yml$          # Ignore pkgdown configuration
-^build\.R$               # Ignore build script
-^docs$                   # Ignore documentation folder (if pkgdown-generated)
-^examples$               # Ignore example scripts
-^pkgdown$                # Ignore pkgdown output
-^tidypollute\.Rproj$     # Ignore RStudio project file
+^.*\.Rproj$
+^\.Rproj\.user$
+^.*\.bib$
+^paper\.md$
+^_pkgdown\.yml$
+^build\.R$
+^docs$
+^examples$
+^pkgdown$
+^cran-comments\.md$
 ^CRAN-SUBMISSION$
-
 ^\.github$
 ^\.internal$
