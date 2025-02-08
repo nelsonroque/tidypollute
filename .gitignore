@@ -24,6 +24,7 @@
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+vignettes/*.Rmd  # (optional, only if you want to exclude source files)
 
 # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
 .httr-oauth
@@ -40,13 +41,18 @@ vignettes/*.pdf
 .Renviron
 
 # pkgdown site
-#docs/
+#docs/   # (remove # if you want to exclude this)
 
 # translation temp files
 po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Other generated or temporary files
 *.zip
 *.csv
 tests/testthat/test-results.xml
+
+# Ignore R build ignore (optional)
+.Rbuildignore

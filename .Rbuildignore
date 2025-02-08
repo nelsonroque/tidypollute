@@ -9,3 +9,4 @@
 ^docs$                   # Ignore documentation folder (if pkgdown-generated)
 ^examples$               # Ignore example scripts
 ^pkgdown$                # Ignore pkgdown output
+^tidypollute\.Rproj$     # Ignore RStudio project file
