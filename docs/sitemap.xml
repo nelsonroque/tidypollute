@@ -7,6 +7,9 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/articles/atmotube.html</loc>
+  </url>
+  <url>
     <loc>/articles/easy-request.html</loc>
   </url>
   <url>
@@ -47,6 +50,9 @@
   </url>
   <url>
     <loc>/reference/epa_superfund_npl_sites.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_atmotube_data.html</loc>
   </url>
   <url>
     <loc>/reference/get_epa_airdata.html</loc>

@@ -50,9 +50,7 @@ df_1991_co_filt <- df_1991_co %>%
 # Count records per day -----
 df_1991_co_filt %>% 
   count(date_local) %>%
-  head(.) %>%
-  knitr::kable(.) %>% 
-  kableExtra::kable_classic(.)
+  head(.)
 ```
 
 ```{r, message=F, warning=F}

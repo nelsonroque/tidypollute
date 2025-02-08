@@ -25,7 +25,7 @@ bibliography: paper.bib
 # Summary
 Understanding air quality is essential for public health, environmental policy, and research. The **tidypollute** R package currently provides tools to efficiently work with **EPA AirData** flat files, offering a structured approach to importing, cleaning, and analyzing air pollution data. This package is designed for environmental researchers, policymakers, and analysts who need streamlined access to large-scale air quality datasets without the overhead of direct API calls.  
 
-The package facilitates efficient data handling of air quality measurements such as **PM2.5, ozone, NO2, CO, and SO2**, and [others](https://aqs.epa.gov/aqsweb/airdata/download_files.html). It allows users to explore long-term trends, compare geographic variations, and generate custom summaries.  
+The package, published with a GPL-3 license, facilitates efficient data handling of air quality measurements such as **PM2.5, ozone, NO2, CO, and SO2**, and [others](https://aqs.epa.gov/aqsweb/airdata/download_files.html). It allows users to explore long-term trends, compare geographic variations, and generate custom summaries.  
 
 For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_codes()`.
 
@@ -33,9 +33,9 @@ For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_cod
   - **Efficient EPA AirData import**: Load and preprocess flat files by specifying the analyte (e.g., "44201" for ozone), the start and end of the year query (e.g., `start_year`=1991, `end_year`=2000), and the frequency (e.g., `freq` = "hourly", "daily", "annual")  to the function, `get_epa_airdata()`.
   - **Automated metadata scraping**: The function `scrape_epa_airdata_zip_links()` gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and `get_epa_airdata_analyte_codes()` to gather the various file types in a handy table (i.e., tibble).
   - **Streamlined bulk downloads**: `download_stack_epa_airdata()` enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named `url` for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.
-  - **Built-in dataset archives**: `epa_airdata_links`, `epa_airdata_monitoring_sites` and `epa_superfund_npl_sites`, to name a few!
+  - **Built-in EPA dataset archives**: `epa_airdata_links`, `epa_airdata_monitoring_sites` and `epa_superfund_npl_sites`, to name a few!
+  - **Access to Atmotube Cloud API** for sensor data from Atmotube Pro devices.
 - **Planned Enhancements:**
-
   - Integration with real-time API endpoints and additional environmental datasets.
   - Expansion to support non-U.S. and wearable air quality data sources.
   - Visualization tools for spatial and temporal trends.

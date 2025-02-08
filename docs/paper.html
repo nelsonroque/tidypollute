@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,8 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/atmotube.html">tidypollute: Getting Started with the Atmotube Cloud API</a>
     <a class="dropdown-item" href="articles/easy-request.html">tidypollute: Getting Started</a>
-    <a class="dropdown-item" href="articles/paper.html">tidypollute: An R Package for Working with Environmental Data.</a>
+    <a class="dropdown-item" href="articles/hexsticker.html">tidypollute: Making of the Hex Logo!</a>
   </div>
 </li>
 <li class="nav-item">
@@ -54,37 +55,45 @@
 <ul><li>
 <p><strong>Current Features:</strong></p>
 <ul><li>
-<strong>Efficient EPA AirData import</strong>: Load and preprocess flat files with minimal effort <code><a href="reference/get_epa_airdata.html">get_epa_airdata()</a></code>.</li>
+<strong>Efficient EPA AirData import</strong>: Load and preprocess flat files by specifying the analyte (e.g., “44201” for ozone), the start and end of the year query (e.g., <code>start_year</code>=1991, <code>end_year</code>=2000), and the frequency (e.g., <code>freq</code> = “hourly”, “daily”, “annual”) to the function, <code><a href="reference/get_epa_airdata.html">get_epa_airdata()</a></code>.</li>
 <li>
-<strong>Automated data scraping</strong>: Functions like <code><a href="reference/scrape_epa_airdata_zip_links.html">scrape_epa_airdata_zip_links()</a></code> gather and maintain up-to-date links to AirData files.</li>
+<strong>Automated metadata scraping</strong>: The function <code><a href="reference/scrape_epa_airdata_zip_links.html">scrape_epa_airdata_zip_links()</a></code> gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and <code><a href="reference/get_epa_airdata_analyte_codes.html">get_epa_airdata_analyte_codes()</a></code> to gather the various file types in a handy table (i.e., tibble).</li>
 <li>
-<strong>Streamlined bulk downloads</strong>: <code><a href="reference/download_stack_epa_airdata.html">download_stack_epa_airdata()</a></code> enables batch downloading of multiple datasets.</li>
+<strong>Streamlined bulk downloads</strong>: <code><a href="reference/download_stack_epa_airdata.html">download_stack_epa_airdata()</a></code> enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named <code>url</code> for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.</li>
 <li>
-<strong>Station metadata retrieval</strong> for site-specific studies.</li>
-<li>
-<strong>Support for large-scale data handling</strong>.</li>
-<li>
-<strong>Built-in dataset references</strong>: <code>epa_airdata_links</code>, <code>epa_airdata_monitoring_sites</code> and <code>epa_superfund_npl_sites</code>, to name a few!</li>
-</ul><p><strong>Planned Enhancements:</strong></p>
-<ul><li>Integration with real-time EPA API endpoints and additional environmental datasets.</li>
-<li>Enhanced visualization tools for spatial and temporal trends.</li>
-<li>Expansion to support non-U.S. and wearable air quality data sources.</li>
+<strong>Built-in dataset archives</strong>: <code>epa_airdata_links</code>, <code>epa_airdata_monitoring_sites</code> and <code>epa_superfund_npl_sites</code>, to name a few!</li>
 </ul></li>
-</ul><p>There are several datasets hosted inside of this package. - The <code>epa_airdata_monitoring_sites</code> dataset contains metadata for monitoring sites (as of February 5, 2025). - The <code>epa_airdata_links</code> dataset contains links to the most recent flat files, while <code>epa_airdata_links_archive</code> contains links to flat files, archived by Archive.org. - The <code>epa_superfund_npl_sites</code> dataset contains metadata for Superfund sites (as of February 5, 2025). - The <code>us_states</code> dataset containing basic metadata about states (e.g., abbreviations, size)</p>
+<li>
+<p><strong>Planned Enhancements:</strong></p>
+<ul><li>Integration with real-time API endpoints and additional environmental datasets.</li>
+<li>Expansion to support non-U.S. and wearable air quality data sources.</li>
+<li>Visualization tools for spatial and temporal trends.</li>
+</ul></li>
+</ul><p>There are several datasets hosted inside of this package.</p>
+<ul><li>The <code>epa_airdata_monitoring_sites</code> dataset contains metadata for EPA AirData monitoring sites (as of February 5, 2025).</li>
+<li>The <code>epa_airdata_links</code> dataset contains links to all pre-generated flat files, while <code>epa_airdata_links_archive</code> contains links to flat files, as archived by Archive.org.</li>
+<li>The <code>epa_superfund_npl_sites</code> dataset contains metadata for Superfund sites (as of February 5, 2025).</li>
+<li>The <code>us_states</code> dataset containing basic metadata about states (e.g., abbreviations, size, region)</li>
+</ul><p>For help getting started, please</p>
 </div>
 <div class="section level1">
 <h1 id="statement-of-need">Statement of Need<a class="anchor" aria-label="anchor" href="#statement-of-need"></a></h1>
 <p>Air quality is a critical factor influencing public health, yet analyzing EPA AirData can be cumbersome due to the size and complexity of raw datasets. Many existing tools focus on API-based retrieval, but large-scale historical analyses often require working directly with the <strong>flat files</strong> provided by the EPA.</p>
-<p>The <strong>tidypollute</strong> package addresses this gap by: - <strong>Providing structured functions</strong> to load and process EPA flat files efficiently<br>
-- <strong>Reducing barriers</strong> for researchers and analysts who may not have experience with raw EPA data processing<br>
-- <strong>Enhancing accessibility</strong> to environmental data for policy discussions and advocacy<br>
-- <strong>Laying the groundwork</strong> for future environmental data integrations</p>
-<p>By offering a lightweight yet powerful R package, for now, tailored for <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">EPA AirData</a>, this project aims to empower users to make data-driven decisions regarding air quality policy, environmental justice, and public health.</p>
+<p>The <strong>tidypollute</strong> package addresses this gap by:</p>
+<ul><li>
+<strong>Providing structured functions</strong> to load and process EPA flat files efficiently<br></li>
+<li>
+<strong>Reducing barriers</strong> for researchers and analysts who may not have experience with raw EPA data processing<br></li>
+<li>
+<strong>Enhancing accessibility</strong> to environmental data for policy discussions and advocacy<br></li>
+<li>
+<strong>Laying the groundwork</strong> for future environmental data integrations</li>
+</ul><p>By offering a lightweight yet powerful R package, for now, tailored for <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">EPA AirData</a>, this project aims to empower users to make data-driven decisions regarding air quality policy, environmental justice, and public health.</p>
 <p>If anyone’s research depends on air quality data, this tool would make seamless the download and backup of this data, with just one line of code.</p>
 </div>
 <div class="section level1">
 <h1 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a></h1>
-<p>[insert plot of this data for whole US at given year (panel a) and code screenshot (panel b)]</p>
+<p>[INSERT HELPFUL FIGURE OF FUNCTIONS]</p>
 </div>
 <div class="section level1">
 <h1 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a></h1>
@@ -92,8 +101,7 @@
 </div>
 <div class="section level1">
 <h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-<p>Citations for relevant papers or datasets will be included here.<br>
-Cite: <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link uri">https://aqs.epa.gov/aqsweb/airdata/download_files.html</a></p>
+<p><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link uri">https://aqs.epa.gov/aqsweb/airdata/download_files.html</a></p>
 </div>
 
 
