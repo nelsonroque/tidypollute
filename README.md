@@ -19,9 +19,11 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
 
 ---
 
-### 📌 Current Features
+### **📌 Current Features**
   ✅ **Read and process EPA AirData flat files**  
   ✅ **Tidy up and filter air pollution data**  
+  
+---
 
 ### **🛣️ Roadmap: What's Next?**
   🛠 **Quick and simple visualizations**  

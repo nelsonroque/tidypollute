@@ -1,6 +1,7 @@
 ---
 title: "tidypollute: Getting Started with the Atmotube Cloud API"
 author: "Dr. Nelson Roque"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{tidypollute: Getting Started with the Atmotube Cloud API}
@@ -24,38 +25,31 @@ Make sure you store your API key securely.
 
 ------------------------------------------------------------------------
 
-## Retrieving Data
 
-### Fetching Data in JSON Format
 
-Use `get_atmotube_data()` to retrieve air quality data:
+## Introduction
 
-```r
-api_key <- "your_api_key_here"
-mac <- "d3:8e:70:ac:49:68"
-start_date <- "2024-10-20"
-end_date <- "2024-10-27"
+This vignette demonstrates how to use the `get_atmotube_data()` function to retrieve air quality data from the Atmotube Cloud API. The function automatically adapts to the requested date range, making a single API request for short durations and batching requests for longer durations.
 
-data <- get_atmotube_data(api_key, mac, start_date, end_date, format = "json")
+## Retrieving Atmotube Data
 
-# View the structure of the response
-str(data)
-```
+The `get_atmotube_data()` function fetches Atmotube air quality data based on user-defined parameters.
 
-### Fetching Data in CSV Format
+### Required Parameters
+- `api_key`: Your Atmotube API key.
+- `mac`: The MAC address of your Atmotube device (format: `"aa:bb:cc:dd:ee:ff"`).
+- `start_date`: Start date in `YYYY-MM-DD` format.
+- `end_date`: End date in `YYYY-MM-DD` format.
 
-If you prefer a **CSV** response:
+### Optional Parameters
+- `order`: Sorting order, either `"asc"` (ascending) or `"desc"` (descending). Default is `"asc"`.
+- `format`: Response format, either `"json"` or `"csv"`. Default is `"json"`.
+- `offset`: Starting index for pagination. Default is `0`.
+- `limit`: Number of records to retrieve per request (1-1440). Default is `1440`.
+- `separator`: CSV separator if `format="csv"`. Default is `","`.
+- `base_url`: API base URL. Default is `"https://api.atmotube.com/api/v1/data"`.
 
-```r
-csv_data <- get_atmotube_data(api_key, mac, start_date, end_date, format = "csv")
-
-# Print first few rows (if using read.csv)
-read.csv(text = csv_data, sep = ";") |> head()
-```
-
-## Parameter Options
-
-The function supports several parameters:
+Also in this table:
 
 | Parameter   | Description | Default | Valid Values |
 |-------------|------------|---------|-------------|
@@ -65,22 +59,36 @@ The function supports several parameters:
 | `limit`     | Number of records | `1440` | `1-1440` |
 | `separator` | CSV separator | `"semicolon"` | Any delimiter |
 
-### Example: Fetching a Limited Dataset for a Single Device
-
-```r
-small_data <- get_atmotube_data(api_key, mac, start_date, end_date, limit = 10)
-print(small_data)
-```
-
-### Example: Fetching Large Intervals of Data (more than 7 days) for a Single Device
+### Example: Fetch Data for a Short Period (Within 7 Days)
 
 ```r
 api_key <- "your_api_key_here"
 mac <- "aa:bb:cc:dd:ee:ff"
 start_date <- "2024-06-01"
-end_date <- "2024-07-01"
-data <- get_atmotube_data_bulk(api_key, mac, start_date, end_date)
+end_date <- "2024-06-03"
+
+data <- get_atmotube_data(api_key, mac, start_date, end_date)
 print(data)
+```
+
+### Example: Fetch Data for a Longer Period (More than 7 Days)
+
+The function automatically breaks the request into **7-day chunks** with a **1-day overlap**.
+
+```r
+start_date <- "2024-06-01"
+end_date <- "2024-07-01"
+
+data <- get_atmotube_data(api_key, mac, start_date, end_date)
+print(data)
+```
+
+### Handling CSV Output
+If you prefer CSV format, set `format="csv"`:
+
+```r
+data_csv <- get_atmotube_data(api_key, mac, start_date, end_date, format="csv")
+writeLines(data_csv, "atmotube_data.csv")
 ```
 
 ### Example: Fetching Data for Multiple Devices, Across Large Intervals
@@ -103,50 +111,26 @@ api_key <- "your_api_key_here"
 # Fetch data and unnest results into a long format
 results_df <- mac_table %>%
   rowwise() %>%
-  mutate(data = list(get_atmotube_data_bulk(api_key, mac, start_date, end_date))) %>%
+  mutate(data = list(get_atmotube_data(api_key, mac, start_date, end_date))) %>%
   ungroup() %>%
-  unnest(data)  # Expands lists into rows
+  unnest_wider(data)  # Expands list columns into separate columns
 
 # View tidy output
 print(results_df)
 ```
 
 ## Error Handling
+The function validates all parameters before making an API request. If an invalid parameter is provided, an error message is returned. Common checks include:
+- Invalid MAC address format.
+- Invalid date format.
+- Start date after the end date.
+- Exceeding API limits on pagination or record retrieval.
 
-The function automatically checks for:
-- Invalid API parameters
+## Summary
+This vignette demonstrated how to use the `get_atmotube_data()` function to retrieve air quality data from the Atmotube API efficiently. The function dynamically handles **single requests for short periods** and **batched requests for long periods** to comply with API limits.
 
-- Improper MAC address formatting
-
-- Out-of-range values for `limit`, `offset`, etc.
-
-Example of an invalid request:
-
-```r
-get_atmotube_data(api_key, "invalid_mac", start_date, end_date)
-# Error: Invalid 'mac' parameter. Must be in format 'aa:bb:cc:dd:ee:ff'.
-```
+For further questions, refer to the Atmotube API documentation or contact support.
 
 ---
 
-## Summary
-
-This notebook provides a **simple workflow** for retrieving EPA AirData using `tidypollute`.
-
-You can:
-
-✅ Introduces `get_atmotube_data()`  and `get_atmotube_data_bulk()`
-
-✅ Explains how to install & authenticate  
-
-✅ Provides examples for JSON & CSV  
-
-✅ Shows parameter options with a table
-
-✅ Includes error handling examples  
-
-## Conclusion
-
-This vignette provides a quick guide to fetching air quality data using the Atmotube API in R. For further details, refer to the API documentation. Happy coding! 🚀
-
-For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).
+Happy coding! 🚀

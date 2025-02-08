@@ -12,7 +12,8 @@ Imports:
     stringr, tibble, 
     lubridate, 
     rvest, 
-    httr, httr2, 
+    httr, 
+    httr2, 
     progress, 
     janitor, digest
 Suggests:
