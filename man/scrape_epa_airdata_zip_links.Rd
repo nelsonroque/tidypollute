@@ -14,33 +14,10 @@ scrape_epa_airdata_zip_links(archive = FALSE, archive_id = "20250126115248")
 on the Wayback Machine (only used if \code{archive = TRUE}). Defaults to \code{"20250126115248"}.}
 }
 \value{
-A tibble with the following columns:
-\itemize{
-\item \code{year}: Year extracted from the filename (if present).
-\item \code{unit_of_analysis}: Type of data aggregation (e.g., "daily", "hourly", "annual").
-\item \code{analyte}: The pollutant or air quality measure extracted from the filename.
-\item \code{url}: The full URL to download the ZIP file.
-\item \code{analyte_description}: A human-readable description of the analyte.
-}
+A tibble with structured metadata of available ZIP files.
 }
 \description{
 This function scrapes the EPA AirData website for downloadable ZIP file links,
 extracts relevant metadata from filenames (such as year, unit of analysis, and analyte),
 and returns a tidy tibble with structured information.
-}
-\details{
-The function scrapes the live EPA AirData website (\verb{https://aqs.epa.gov/aqsweb/airdata/download_files.html})
-unless \code{archive = TRUE}, in which case it retrieves an archived version from the Wayback Machine.
-
-Filenames are parsed to extract metadata based on naming conventions used by EPA.
-}
-\examples{
-\dontrun{
-# Scrape live EPA AirData ZIP links
-epa_links <- scrape_epa_airdata_zip_links()
-
-# Scrape from an archived version (useful if the live site is down)
-archived_links <- scrape_epa_airdata_zip_links(archive = TRUE, archive_id = "20240101000000")
-}
-
 }
