@@ -52,14 +52,14 @@ For help getting started, please see the vignettes included with this package.
 # Statement of Need
 Air quality is a critical factor influencing public health, yet analyzing EPA AirData can be cumbersome due to the size and complexity of raw datasets. Many existing tools focus on API-based retrieval, but large-scale historical analyses often require working directly with the **flat files** provided by the EPA.  
 
-The **tidypollute** package addresses this gap by:
+The **tidypollute** package aims to address this gap by:
 
 - **Providing structured functions** to load and process EPA flat files efficiently  
 - **Reducing barriers** for researchers and analysts who may not have experience with raw EPA data processing  
 - **Enhancing accessibility** to environmental data for policy discussions and advocacy  
 - **Laying the groundwork** for future environmental data integrations
 
-By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html), this project aims to empower users to make data-driven decisions regarding air quality policy, environmental justice, and public health.  
+By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html), this project aims to empower users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.  
 
 If anyone's research depends on air quality data, this tool would make seamless the download and backup of this data, with just one line of code.
 
