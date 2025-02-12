@@ -1,7 +1,6 @@
 ---
 title: "tidypollute: Getting Started with the Atmotube Cloud API"
 author: "Dr. Nelson Roque"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{tidypollute: Getting Started with the Atmotube Cloud API}
