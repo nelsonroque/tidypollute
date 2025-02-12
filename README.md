@@ -28,6 +28,7 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
 ### **📌 Current Features**
   ✅ **Read and process EPA AirData flat files**  
   ✅ **Read EPA AirData metadata**  
+  ✅ **Extract data from the Atmotube Cloud API**  
   ✅ **Tidy up and filter air pollution data**  
   
 ---
