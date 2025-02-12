@@ -74,9 +74,10 @@ Panel B depicts the one-liner R function that downloads the flat files for a spe
 
 # Acknowledgements
 The development of `tidypollute` was made possible with support from NIA (`P01-AG003949`) and Dr. Roque's PSU Start-up funds. 
-Thank you, Hailey Andrews, for helping brainstorm the name of this package. 
+Thank you [Dr. Charles B Hall](https://einsteinmed.edu/faculty/6913/charles-hall), [Dr. Dean Hosgood](https://einsteinmed.edu/faculty/13282/h-hosgood), and Hailey Andrews, for your support and manuscript reads.
+Thank you [Dr. Alexis Santos-Lozada](https://hhd.psu.edu/contact/alexis-santos-santos-lozada) and [Dr. Johnny Felt](https://healthyaging.psu.edu/people/jzf434) for function name brainstorming.
+Thank you, Hailey Andrews, for helping brainstorm the name of this package.
 Thank you, Karishma Christmas, for your documentation support.
-Thank you [Dr. Charles B Hall](https://einsteinmed.edu/faculty/6913/charles-hall) and [Dr. Dean Hosgood](https://einsteinmed.edu/faculty/13282/h-hosgood) for your support and manuscript reads.
 
 # References
 [Data Source](https://aqs.epa.gov/aqsweb/airdata/download_files.html)
