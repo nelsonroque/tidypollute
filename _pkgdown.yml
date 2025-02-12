@@ -15,5 +15,6 @@ reference:
   contents:
   - starts_with("epa")
   - starts_with("us_states")
-
-
+figures:
+  dpi: 300
+  dev: ragg::agg_png

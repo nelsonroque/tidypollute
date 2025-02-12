@@ -38,10 +38,9 @@ get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115
     html_nodes("a") %>%
     html_attr("href") %>%
     as_tibble(.name_repair = "minimal") %>%
-    rename(link = value) %>%  # Explicitly name the column
+    rename(link = .data$value) %>%  # Explicitly name the column
     filter(grepl("\\.zip$", .data$link)) %>%
-    pull(link)
-
+    pull(.data$link)
 
   # Parse ZIP metadata
   zip_links_tbl <- tibble(url = zip_links) %>%
