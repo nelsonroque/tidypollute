@@ -2,6 +2,8 @@
 
 🚀 **An R package for working with EPA AirData flat files and AQS API!** 🚀
 
+Developer: [Dr. Nelson Roque](https://www.linkedin.com/in/nelsonroque/) | ORCID: https://orcid.org/0000-0003-1184-202X
+
 ---
 
 ## **Overview**
@@ -21,6 +23,7 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
 
 ### **📌 Current Features**
   ✅ **Read and process EPA AirData flat files**  
+  ✅ **Read EPA AirData metadata**  
   ✅ **Tidy up and filter air pollution data**  
   
 ---

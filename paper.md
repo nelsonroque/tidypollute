@@ -23,13 +23,15 @@ bibliography: paper.bib
 ---
 
 # Summary
-Understanding air quality is essential for public health, environmental policy, and research. The **tidypollute** R package currently provides tools to efficiently work with **EPA AirData** flat files, offering a structured approach to importing, cleaning, and analyzing air pollution data. This package is designed for environmental researchers, policymakers, and analysts who need streamlined access to large-scale air quality datasets without the overhead of direct API calls.  
+Understanding air quality is essential for public health, environmental policy, and research. The **tidypollute** R package currently provides tools to efficiently work with **EPA AirData** flat files [@epa_airdata], offering a structured approach to importing, cleaning, and analyzing air pollution data. This package is designed for environmental researchers, policymakers, and analysts who need streamlined access to large-scale air quality datasets without the overhead of direct API calls.  
 
 ![Logo for `tidypollute` package](./man/figures/logo.png)
 
 The package, published with a GPL-3 license, facilitates efficient data handling of air quality measurements such as **PM2.5, ozone, NO2, CO, and SO2**, and [others](https://aqs.epa.gov/aqsweb/airdata/download_files.html). It allows users to explore long-term trends, compare geographic variations, and generate custom summaries.  
 
 For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_codes()`.
+
+For the rest of the documentation, please visit: [@tidypollute_docs]
 
 - **Current Features:**
   - **Efficient EPA AirData import**: Load and preprocess flat files by specifying the analyte (e.g., "44201" for ozone), the start and end of the year query (e.g., `start_year`=1991, `end_year`=2000), and the frequency (e.g., `freq` = "hourly", "daily", "annual")  to the function, `get_epa_airdata()`.
@@ -61,7 +63,7 @@ The **tidypollute** package aims to address this gap by:
 - **Enhancing accessibility** to environmental data for public health, environmental policy, and research.
 - **Laying the groundwork** for future environmental data integrations
 
-By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html), this project aims to support users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.  
+By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html) [@epa_airdata], this project aims to support users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.  
 
 If anyone's research depends on air quality data, this tool would make seamless the download and backup of this data, with just one line of code.
 
