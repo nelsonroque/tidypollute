@@ -33,8 +33,8 @@ For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_cod
   - **Efficient EPA AirData import**: Load and preprocess flat files by specifying the analyte (e.g., "44201" for ozone), the start and end of the year query (e.g., `start_year`=1991, `end_year`=2000), and the frequency (e.g., `freq` = "hourly", "daily", "annual")  to the function, `get_epa_airdata()`.
   - **Automated metadata scraping**: The function `scrape_epa_airdata_zip_links()` gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and `get_epa_airdata_analyte_codes()` to gather the various file types in a handy table (i.e., tibble).
   - **Streamlined bulk downloads**: `download_stack_epa_airdata()` enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named `url` for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.
-  - **Built-in EPA dataset archives**: `epa_airdata_links`, `epa_airdata_monitoring_sites` and `epa_superfund_npl_sites`, to name a few!
-  - **Access to Atmotube Cloud API** for sensor data from Atmotube Pro devices from your fleet or research project (API Key required from Atmotube).
+  - **Built-in EPA dataset archives**: `epa_airdata_links`, `epa_airdata_monitoring_sites` and `epa_superfund_npl_sites`, to name a few.
+  - **Access to Wearable Air Quality data from Wearables** for sensor data from your fleet or research project. This currently supports the Atmotube Pro device. An API Key is required from Atmotube.
 - **Planned Enhancements:**
   - Integration with real-time API endpoints and additional environmental datasets (e.g., water quality).
   - Expansion to support non-U.S. and other wearable air quality data sources (e.g., Purple Air, Flow2).
@@ -56,16 +56,19 @@ The **tidypollute** package aims to address this gap by:
 
 - **Providing structured functions** to load and process EPA flat files efficiently  
 - **Reducing barriers** for researchers and analysts who may not have experience with raw EPA data processing  
-- **Enhancing accessibility** to environmental data for policy discussions and advocacy  
+- **Enhancing accessibility** to environmental data for public health, environmental policy, and research.
 - **Laying the groundwork** for future environmental data integrations
 
-By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html), this project aims to empower users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.  
+By offering a lightweight yet powerful R package, for now, tailored for [EPA AirData](https://aqs.epa.gov/aqsweb/airdata/download_files.html), this project aims to support users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.  
 
 If anyone's research depends on air quality data, this tool would make seamless the download and backup of this data, with just one line of code.
 
 # Figures
 
-[INSERT HELPFUL FIGURE OF FUNCTIONS]
+![Figure 1](./figures/figure1.png)
+Figure 1. Primary functions from this package and their results. 
+Panel A depicts the function that parses the AirData flat file home page for zip file links. 
+Panel B depicts the one-liner R function that downloads the flat files for a specific analyte.
 
 # Acknowledgements
 The development of `tidypollute` was made possible with support from NIA (`P01-AG003949`) and Dr. Roque's PSU Start-up funds. 

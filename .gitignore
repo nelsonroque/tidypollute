@@ -56,3 +56,5 @@ tests/testthat/test-results.xml
 
 # Ignore R build ignore (optional)
 .Rbuildignore
+docs/~$figures.pptx
+.DS_Store
