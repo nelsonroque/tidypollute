@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^.*\.bib$
 ^paper\.md$
+^paper\.pdf$
 ^_pkgdown\.yml$
 ^build\.R$
 ^docs$
