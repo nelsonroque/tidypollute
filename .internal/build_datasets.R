@@ -76,9 +76,11 @@ hash_file <- ".internal/data_hashes.csv"
 
 # Check if file exists and write accordingly
 if (file.exists(hash_file)) {
-  write.table(hashes, file = hash_file, sep = ",", row.names = FALSE, col.names = FALSE, append = TRUE)
+  write.table(hashes, file = hash_file, sep = ",",
+              row.names = FALSE, col.names = FALSE, append = TRUE)
 } else {
-  write.table(hashes, file = hash_file, sep = ",", row.names = FALSE, col.names = TRUE)
+  write.table(hashes, file = hash_file, sep = ",",
+              row.names = FALSE, col.names = TRUE)
 }
 
 # Confirm the write operation

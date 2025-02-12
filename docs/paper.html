@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.17</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.20</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
 <ul><li>
 <strong>Efficient EPA AirData import</strong>: Load and preprocess flat files by specifying the analyte (e.g., “44201” for ozone), the start and end of the year query (e.g., <code>start_year</code>=1991, <code>end_year</code>=2000), and the frequency (e.g., <code>freq</code> = “hourly”, “daily”, “annual”) to the function, <code><a href="reference/get_epa_airdata.html">get_epa_airdata()</a></code>.</li>
 <li>
-<strong>Automated metadata scraping</strong>: The function <code><a href="reference/scrape_epa_airdata_zip_links.html">scrape_epa_airdata_zip_links()</a></code> gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and <code><a href="reference/get_epa_airdata_analyte_codes.html">get_epa_airdata_analyte_codes()</a></code> to gather the various file types in a handy table (i.e., tibble).</li>
+<strong>Automated metadata scraping</strong>: The function <code>scrape_epa_airdata_zip_links()</code> gathers up-to-date links to AirData files (along with archives through 2024 as built in datasets), and <code><a href="reference/get_epa_airdata_analyte_codes.html">get_epa_airdata_analyte_codes()</a></code> to gather the various file types in a handy table (i.e., tibble).</li>
 <li>
 <strong>Streamlined bulk downloads</strong>: <code><a href="reference/download_stack_epa_airdata.html">download_stack_epa_airdata()</a></code> enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named <code>url</code> for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.</li>
 <li>
