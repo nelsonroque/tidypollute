@@ -10,8 +10,11 @@ reference:
 - contents:
   - starts_with("get")
   - starts_with("download")
+  - starts_with("scrape")
 - subtitle: Datasets
   desc: Statistical transformations transform data before display.
   contents:
   - starts_with("epa")
   - starts_with("us_states")
+
+
