@@ -6,7 +6,7 @@
 
 ## **Overview**
 
-**tidypollute** is a lightweight R package designed to make working with EPA air quality data **easy, tidy, and efficient**. Whether you're a researcher, policymaker, or just an environmental data enthusiast, this package helps you import, clean, and analyze large-scale air pollution datasets with minimal hassle.
+**tidypollute** is a lightweight R package designed to make working with environmental data **easy, tidy, and efficient**. Whether you're a researcher, policymaker, or just an environmental data enthusiast, this package helps you import, clean, and analyze large-scale air pollution datasets with minimal hassle.
 
 Learn more, by reading this package's [Documentation](https://nelsonroque.github.io/tidypollute/index.html).
 
@@ -68,9 +68,10 @@ library(tidypollute)
 
 # Acknowledgements
 The development of `tidypollute` was made possible with support from NIA (`P01-AG003949`) and Dr. Roque's PSU Start-up funds. 
-Thank you, Hailey Andrews, for helping brainstorm the name of this package. 
-Thank you, Karishma Christmas, for your documentation support.
 Thank you [Dr. Charles B Hall](https://einsteinmed.edu/faculty/6913/charles-hall) and [Dr. Dean Hosgood](https://einsteinmed.edu/faculty/13282/h-hosgood) for your support and manuscript reads.
+Thank you [Dr. Alexis Santos-Lozada](https://hhd.psu.edu/contact/alexis-santos-santos-lozada) and [Dr. Johnny Felt](https://healthyaging.psu.edu/people/jzf434) for function name brainstorming.
+Thank you, Hailey Andrews, for helping brainstorm the name of this package.
+Thank you, Karishma Christmas, for your documentation support.
 
 ---
 
