@@ -67,7 +67,7 @@ If anyone's research depends on air quality data, this tool would make seamless 
 
 # Figures
 
-![Figure 1](./figures/figure1.png)
+![Figure 1](./man/figures/figure1.png)
 Figure 1. Primary functions from this package and their results. 
 Panel A depicts the function that parses the AirData flat file home page for zip file links. 
 Panel B depicts the one-liner R function that downloads the flat files for a specific analyte.

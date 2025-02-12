@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,9 @@
 <div id="summary" class="section level1">
 
 <p>Understanding air quality is essential for public health, environmental policy, and research. The <strong>tidypollute</strong> R package currently provides tools to efficiently work with <strong>EPA AirData</strong> flat files, offering a structured approach to importing, cleaning, and analyzing air pollution data. This package is designed for environmental researchers, policymakers, and analysts who need streamlined access to large-scale air quality datasets without the overhead of direct API calls.</p>
+<div class="float">
+<img src="./reference/figures/logo.png" alt="Logo for tidypollute package"><div class="figcaption">Logo for <code>tidypollute</code> package</div>
+</div>
 <p>The package, published with a GPL-3 license, facilitates efficient data handling of air quality measurements such as <strong>PM2.5, ozone, NO2, CO, and SO2</strong>, and <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">others</a>. It allows users to explore long-term trends, compare geographic variations, and generate custom summaries.</p>
 <p>For possible analyte codes, please see <code><a href="reference/get_epa_airdata_analyte_codes.html">tidypollute::get_epa_airdata_analyte_codes()</a></code>.</p>
 <ul><li>
@@ -61,9 +64,9 @@
 <li>
 <strong>Streamlined bulk downloads</strong>: <code><a href="reference/download_stack_epa_airdata.html">download_stack_epa_airdata()</a></code> enables batch downloading of multiple datasets. All you need is a data.frame (or tibble) with a column named <code>url</code> for download. This means you can download, for example, 1991 Ozone data and 2001 Particulate Matter, PM2.5 data.</li>
 <li>
-<strong>Built-in EPA dataset archives</strong>: <code>epa_airdata_links</code>, <code>epa_airdata_monitoring_sites</code> and <code>epa_superfund_npl_sites</code>, to name a few!</li>
+<strong>Built-in EPA dataset archives</strong>: <code>epa_airdata_links</code>, <code>epa_airdata_monitoring_sites</code> and <code>epa_superfund_npl_sites</code>, to name a few.</li>
 <li>
-<strong>Access to Atmotube Cloud API</strong> for sensor data from Atmotube Pro devices from your fleet or research project (API Key required from Atmotube).</li>
+<strong>Access to Wearable Air Quality data from Wearables</strong> for sensor data from your fleet or research project. This currently supports the Atmotube Pro device. An API Key is required from Atmotube.</li>
 </ul></li>
 <li>
 <strong>Planned Enhancements:</strong>
@@ -87,15 +90,15 @@
 <li>
 <strong>Reducing barriers</strong> for researchers and analysts who may not have experience with raw EPA data processing<br></li>
 <li>
-<strong>Enhancing accessibility</strong> to environmental data for policy discussions and advocacy<br></li>
+<strong>Enhancing accessibility</strong> to environmental data for public health, environmental policy, and research.</li>
 <li>
 <strong>Laying the groundwork</strong> for future environmental data integrations</li>
-</ul><p>By offering a lightweight yet powerful R package, for now, tailored for <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">EPA AirData</a>, this project aims to empower users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.</p>
+</ul><p>By offering a lightweight yet powerful R package, for now, tailored for <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">EPA AirData</a>, this project aims to support users to make data-driven decisions regarding air quality policy, environmental exposures, and public health.</p>
 <p>If anyone’s research depends on air quality data, this tool would make seamless the download and backup of this data, with just one line of code.</p>
 </div>
 <div class="section level1">
 <h1 id="figures">Figures<a class="anchor" aria-label="anchor" href="#figures"></a></h1>
-<p>[INSERT HELPFUL FIGURE OF FUNCTIONS]</p>
+<p><img src="./figures/figure1.png" alt="Figure 1"> Figure 1. Primary functions from this package and their results. Panel A depicts the function that parses the AirData flat file home page for zip file links. Panel B depicts the one-liner R function that downloads the flat files for a specific analyte.</p>
 </div>
 <div class="section level1">
 <h1 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a></h1>
@@ -103,7 +106,7 @@
 </div>
 <div class="section level1">
 <h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h1>
-<p><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link uri">https://aqs.epa.gov/aqsweb/airdata/download_files.html</a></p>
+<p><a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="external-link">Data Source</a> <a href="https://nelsonroque.github.io/tidypollute/index.html" class="external-link">Documentation</a></p>
 </div>
 
 
