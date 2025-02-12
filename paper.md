@@ -25,6 +25,8 @@ bibliography: paper.bib
 # Summary
 Understanding air quality is essential for public health, environmental policy, and research. The **tidypollute** R package currently provides tools to efficiently work with **EPA AirData** flat files, offering a structured approach to importing, cleaning, and analyzing air pollution data. This package is designed for environmental researchers, policymakers, and analysts who need streamlined access to large-scale air quality datasets without the overhead of direct API calls.  
 
+![Logo for `tidypollute` package](./man/figures/logo.png)
+
 The package, published with a GPL-3 license, facilitates efficient data handling of air quality measurements such as **PM2.5, ozone, NO2, CO, and SO2**, and [others](https://aqs.epa.gov/aqsweb/airdata/download_files.html). It allows users to explore long-term trends, compare geographic variations, and generate custom summaries.  
 
 For possible analyte codes, please see `tidypollute::get_epa_airdata_analyte_codes()`.
@@ -77,4 +79,5 @@ Thank you, Karishma Christmas, for your documentation support.
 Thank you [Dr. Charles B Hall](https://einsteinmed.edu/faculty/6913/charles-hall) and [Dr. Dean Hosgood](https://einsteinmed.edu/faculty/13282/h-hosgood) for your support and manuscript reads.
 
 # References
-https://aqs.epa.gov/aqsweb/airdata/download_files.html
+[Data Source](https://aqs.epa.gov/aqsweb/airdata/download_files.html)
+[Documentation](https://nelsonroque.github.io/tidypollute/index.html)
