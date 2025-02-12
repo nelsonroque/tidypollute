@@ -2,9 +2,9 @@
 
 ## Submission Summary
 - **Package Name:** tidypollute  
-- **Version:** [Specify version, e.g., 0.1.0]  
-- **CRAN Submission Date:** [Specify date]  
-- **Maintainer:** Nelson Roque (nelsonroque@psu.edu)  
+- **Version:** 0.1.23
+- **CRAN Submission Date:** 02/12/2025
+- **Maintainer:** Nelson Roque (nur375@psu.edu)  
 - **Purpose:** First submission to CRAN / Minor update / Major update (choose one)
 
 ---
