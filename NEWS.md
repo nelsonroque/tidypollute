@@ -1,3 +1,5 @@
+# tidypollute 0.1.17
+
 # tidypollute 0.1.16
 
 # tidypollute 0.1.15
@@ -27,6 +29,9 @@
 # tidypollute 0.1.3
 
 # tidypollute 0.1.2
+
+## Features
+- Add visualization to vignettes.
 
 # tidypollute 0.1.1
 

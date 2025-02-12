@@ -12,7 +12,7 @@
 #' @return A tibble with structured metadata of available ZIP files.
 #' @import httr rvest dplyr stringr tibble glue rlang
 #' @export
-scrape_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115248") {
+get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115248") {
 
   # Define URLs
   base_url <- "https://aqs.epa.gov/aqsweb/airdata/"

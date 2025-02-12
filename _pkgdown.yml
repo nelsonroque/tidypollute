@@ -4,15 +4,15 @@ template:
   bootstrap: 5
 
 reference:
-- title: Layers
+- title: `tidypollute`
 - subtitle: Functions
-  desc: Geom is short for geometric element
+  desc: Functions for data access.
 - contents:
   - starts_with("get")
   - starts_with("download")
   - starts_with("scrape")
 - subtitle: Datasets
-  desc: Statistical transformations transform data before display.
+  desc: Built-in datasets for easy usage.
   contents:
   - starts_with("epa")
   - starts_with("us_states")

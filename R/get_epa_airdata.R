@@ -48,7 +48,7 @@ get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "d
   }
 
   # Scrape fresh data links instead of using epa_zip_links
-  zip_links <- tidypollute::scrape_epa_airdata_zip_links()
+  zip_links <- tidypollute::get_epa_airdata_zip_links()
 
   # Get the data links for specified analyte and years
   data_links <- zip_links %>%
