@@ -1,7 +1,5 @@
 # tidypollute 0.1.3
 
-# tidypollute 0.1.2
-
 ## Features
 - Built in metadata datasets (Superfund, US States Metadata)
 - Get EPA AirData flat files as tidy data

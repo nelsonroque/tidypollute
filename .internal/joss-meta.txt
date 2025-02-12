@@ -1,0 +1,9 @@
+The submitted work, including the tidypollute R package, has not been previously published in a peer-reviewed venue. However, it is publicly available on GitHub (https://github.com/nelsonroque/tidypollute), with plans for a future CRAN release.
+
+Software Description:
+tidypollute is an R package designed to streamline access to EPA AirData flat files, providing efficient data import, cleaning, and analysis tools for air pollution research. It addresses a gap in handling large-scale environmental data without relying on API calls. The package supports analytes such as PM2.5, ozone, NO2, CO, and SO2, offers batch downloading of datasets, and includes built-in EPA dataset archives. Future enhancements include real-time API integration, visualization tools, and expanded global dataset support.
+
+This submission is not a resubmission or a second paper in JOSS about this software.
+
+Conflicts of Interest:
+The development of tidypollute was supported by the National Institute on Aging (P01-AG003949) and Pennsylvania State University Start-up funds. No financial conflicts of interest are present.
