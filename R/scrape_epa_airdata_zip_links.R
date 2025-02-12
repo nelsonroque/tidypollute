@@ -29,13 +29,10 @@ scrape_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126
   html <- read_html(page_content)
 
   # Extract ZIP file links
-  zip_href <- html %>%
+  zip_links <- html %>%
     html_nodes("a") %>%
-    html_attr("href")
-
-  zip_links <- zip_href %>%
-    grep("\\.zip$", zip_href, value = TRUE) %>%
-    paste0(base_url, .)
+    html_attr("href") %>%
+    grep("\\.zip$", ., value = TRUE)
 
   # Parse ZIP metadata
   zip_links_tbl <- tibble(url = zip_links) %>%
