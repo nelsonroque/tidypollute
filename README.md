@@ -15,7 +15,10 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
 ---
 
 🔥 **Why use tidypollute?**  
-✔️ **Tidy**: Designed with the `tidyverse` in mind for seamless integration.  
+✔️ **Tidy**: Designed with the `tidyverse` in mind for seamless integration. 
+
+![tidypollute_code](./man/figures/code-screenshot.png)
+
 ✔️ **Fast**: Optimized dplyr functions for handling big air quality datasets.  
 ✔️ **Flexible**: Supports both flat files and (soon!) real-time API queries.
 
@@ -53,7 +56,12 @@ If hosted on GitHub, install with:
 devtools::install_github("nelsonroque/tidypollute")
 ```
 
-### **Load the package**
+Once on CRAN (coming soon!), install with:
+
+```r
+install.packages("tidypollute")
+```
+#### **Load the package**
 
 ```r
 library(tidypollute)
