@@ -25,18 +25,18 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
   
 ---
 
-### **🛣️ Roadmap: What's Next?**
-  🛠 **Quick and simple visualizations**  
+### **🛣️🛠 Roadmap: What's Next?**
+  - **Quick, and simple visualizations from tidy data**  
   
-  🛠️ **Integration with real-time API endpoinst (EPA AirData, Atmotube, Atmocubes**
+  - **Integration with real-time API endpoinst (EPA AirData, Atmocube, Purple Air, Plume Flow)**
   
-  🛠 Add **codebooks** for various datasets
+  - Add **codebooks** for various datasets
   
-  🛠 Generate **DOCX/PDF reports** from air quality data  
+  - Generate **DOCX/PDF reports** from air quality data  
   
-  🛠 Merge air quality data with **Census demographics**
+  - Merge air quality data with **Census demographics**
   
-  🛠 Interactive mapping integration with **mapview**
+  - Interactive mapping integration with **mapview**
 
 ---
 
