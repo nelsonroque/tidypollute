@@ -4,7 +4,8 @@
 
 Developer: [Dr. Nelson Roque](https://www.linkedin.com/in/nelsonroque/) | ORCID: https://orcid.org/0000-0003-1184-202X
 
-Source: [https://github.com/nelsonroque/tidypollute](https://github.com/nelsonroque/tidypollute)
+[Source: https://github.com/nelsonroque/tidypollute](https://github.com/nelsonroque/tidypollute)
+
 ---
 
 ## **Overview**
@@ -28,9 +29,11 @@ Learn more, by reading this package's [Documentation](https://nelsonroque.github
 ### **📌 Current Features**
   ✅ **Read and process EPA AirData flat files**  
   ✅ **Read EPA AirData metadata**  
-  ✅ **Extract data from the Atmotube Cloud API**  
+  ✅ **Extract data from the [Atmotube Cloud API](https://app.swaggerhub.com/apis-docs/Atmotube/cloud_api)**  
   ✅ **Tidy up and filter air pollution data**  
   
+  
+
 ---
 
 ### **🛣️🛠 Roadmap: What's Next?**

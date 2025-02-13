@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,6 +91,16 @@ Defaults to "data/"</p></dd>
 
 <dt>prompt_download</dt>
 <dd><p>Boolean indicating whether to prompt user before downloading (default: False)</p></dd>
+
+
+<dt>archive</dt>
+<dd><p>Logical. If <code>TRUE</code>, the function retrieves data from the Wayback Machine
+(Internet Archive) rather than the live EPA AirData website. Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt>archive_id</dt>
+<dd><p>Character. The timestamp ID for the archived version of the EPA AirData website
+on the Wayback Machine (only used if <code>archive = TRUE</code>). Defaults to <code>"20250126115248"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

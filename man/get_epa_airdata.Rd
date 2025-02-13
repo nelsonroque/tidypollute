@@ -28,6 +28,12 @@ get_epa_airdata(
 Defaults to "data/"}
 
 \item{prompt_download}{Boolean indicating whether to prompt user before downloading (default: False)}
+
+\item{archive}{Logical. If \code{TRUE}, the function retrieves data from the Wayback Machine
+(Internet Archive) rather than the live EPA AirData website. Defaults to \code{FALSE}.}
+
+\item{archive_id}{Character. The timestamp ID for the archived version of the EPA AirData website
+on the Wayback Machine (only used if \code{archive = TRUE}). Defaults to \code{"20250126115248"}.}
 }
 \value{
 A data frame containing the stacked EPA air quality data or NULL if no data
