@@ -1,10 +1,9 @@
-# tidypollute 0.1.5
-
 # tidypollute 0.1.4
 
 ## Improvements
 - Optimizing imports
 - Add `archive`, and `archive_id` in functions that should've had it (`get_epa_airdata()`)
+- Add `tidycensus` vignette.
 
 # tidypollute 0.1.3
 

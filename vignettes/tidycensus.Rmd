@@ -1,0 +1,99 @@
+---
+title: "tidypollute: Meet, `tidycensus`"
+author: "Dr. Nelson Roque"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidypollute: Meet, `tidycensus`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Getting Started with `tidypollute` and `tidycensus`
+
+## Goals of this Notebook
+
+This notebook demonstrates how to **download and stack** EPA AirData files for **2023-2024** focusing on **Ozone (44201)** data, and merge with `tidycensus` information.
+
+------------------------------------------------------------------------
+
+The simplest request retrieves EPA AirData for a specific **analyte** (pollutant) over a given time range (e.g., download daily ozone (44201) data for 1991-1992).
+
+```{r, msg=F, warning=F}
+
+library(tidypollute)
+ozone <- get_epa_airdata(analyte = "44201", start_year = 2023, end_year = 2024, freq = "daily")
+
+```
+
+
+```{r, msg=F, warning=F}
+
+library(tidycensus)
+library(sf)
+library(dplyr)
+
+# Get Census tract demographics (e.g., median income, race)
+census_data <- get_acs(
+  geography = "tract",
+  variables = c(median_income = "B19013_001"),
+  state = "PA",  # Adjust for your state
+  year = 2020,
+  geometry = TRUE
+)
+
+# Convert EPA data to spatial format
+epa_sf <- st_as_sf(ozone, coords = c("longitude", "latitude"), crs = 4326)
+
+# Ensure Census data has the same CRS as epa_sf
+census_data_t <- st_transform(census_data, st_crs(epa_sf))  # Transform to match EPA data
+
+# Perform spatial join
+epa_census <- st_join(epa_sf, census_data_t) %>%
+  filter(variable == "median_income") %>%
+  janitor::clean_names()
+```
+
+```{r}
+library(ggplot2)
+
+# does income predict pollution more in some parts of PA than others? ----
+agg_data = epa_census %>% mutate(
+    est_cut = cut(
+      estimate,
+      breaks = c(0, 20000, 40000, 60000, 80000, 100000, Inf),
+      labels = c("Low", "Low-Mid", "Mid", "Mid-High", "High", "Very High")
+    )
+  ) %>%
+  mutate(year = as.factor(lubridate::year(date_local))) %>%
+  group_by(geoid, year, est_cut) %>%
+  summarize(mean_pollution = mean(arithmetic_mean, na.rm = TRUE))
+
+```
+
+```{r}
+  ggplot(agg_data, aes(x = year, y = mean_pollution, 
+                       color = est_cut, group = geoid)) +
+  geom_point() +
+  geom_line()+
+  theme_minimal() +
+  labs(title = "Ozone Pollution Trends by Census Tract in Pennsylvania",
+       y = "Mean Ozone Levels (ppm)", x = "Year") +
+  theme(legend.position = "none") +
+  facet_grid(.~est_cut)
+
+```
+
+---
+
+## Summary
+
+This notebook provides a **simple workflow** for retrieving EPA AirData and merge with Census data using `tidypollute` and `tidycensus`.
+
+You can:
+
+✅ **Retrieve and filter dataset links (to zip files).**\
+✅ **Download specific pollutant data** (e.g., Ozone, Wind).\
+✅ **Stack and process the downloaded files.**\
+✅ **Scales up to download all available EPA AirData.**
+
+For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).
