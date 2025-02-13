@@ -31,10 +31,10 @@ get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115
     rvest::html_nodes("a") %>%
     rvest::html_attr("href") %>%
     tibble::as_tibble(.name_repair = "minimal") %>%
-    dplyr::rename(link = .data$value) %>%  # Explicitly name the column
-    dplyr::filter(grepl("\\.zip$", .data$link)) %>%
-    dplyr::mutate(link = ifelse(grepl("^https?://", link), link, paste0(base_url, link))) %>%  # Convert relative links to absolute URLs
-    dplyr::pull(.data$link)
+    dplyr::rename("link" := value) %>%  # Use `:=` for renaming
+    dplyr::filter(grepl("\\.zip$", link)) %>%
+    dplyr::mutate(link = ifelse(grepl("^https?://", link), link, paste0(base_url, link))) %>%
+    dplyr::pull(link)
 
   # Parse ZIP metadata
   zip_links_tbl <- tibble(url = zip_links) %>%

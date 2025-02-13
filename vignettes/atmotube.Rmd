@@ -17,7 +17,7 @@ This vignette demonstrates how to use the `get_atmotube_data()` to **download At
 ## API Authentication
 
 To access the Atmotube API, you need:
-- An **API key** (provided by Atmotube)
+- An **API key** ([provided by Atmotube](https://atmotube.com/atmotube-support/atmotube-cloud-api#:~:text=Request-,API,-Key))
 - The **MAC address** of your Atmotube device
 
 Make sure you store your API key securely.
