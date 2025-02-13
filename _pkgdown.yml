@@ -10,10 +10,13 @@ reference:
 - contents:
   - starts_with("get")
   - starts_with("download")
-- subtitle: Datasets
-  desc: Built-in datasets for easy usage.
+- subtitle: EPA Datasets
+  desc: Built-in EPA datasets for easy usage.
   contents:
   - starts_with("epa")
+- subtitle: Metadata Datasets
+  desc: Built-in metadata datasets.
+  contents:
   - starts_with("us_states")
 figures:
   dpi: 300
