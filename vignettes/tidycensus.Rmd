@@ -76,7 +76,7 @@ agg_data = epa_census %>% mutate(
   geom_point() +
   geom_line()+
   theme_minimal() +
-  labs(title = "Ozone Pollution Trends by Census Tract in Pennsylvania",
+  labs(title = "Ozone Pollution Trends, by Income Bracket, in Pennsylvania",
        y = "Mean Ozone Levels (ppm)", x = "Year") +
   theme(legend.position = "none") +
   facet_grid(.~est_cut)
