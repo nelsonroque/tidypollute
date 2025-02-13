@@ -10,7 +10,9 @@ get_epa_airdata(
   end_year,
   freq,
   output_dir = "data/",
-  prompt_download = F
+  prompt_download = F,
+  archive = FALSE,
+  archive_id = NULL
 )
 }
 \arguments{

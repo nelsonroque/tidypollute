@@ -2,16 +2,23 @@
 % Please edit documentation in R/get_epa_airdata_analyte_codes.R
 \name{get_epa_airdata_analyte_codes}
 \alias{get_epa_airdata_analyte_codes}
-\title{Scrape Table Headers from EPA AirData Webpage}
+\title{Retrieve Unique Analyte Codes from EPA AirData Archive}
 \usage{
-get_epa_airdata_analyte_codes()
+get_epa_airdata_analyte_codes(archive = FALSE, archive_id = "20250126115248")
+}
+\arguments{
+\item{archive}{Logical. If \code{TRUE}, retrieves analyte codes from an archived version of the dataset.}
+
+\item{archive_id}{Character. The specific archive snapshot ID to use when \code{archive = TRUE}.
+Default is \code{"20250126115248"}, referring to the most recent known snapshot at the time of documentation.}
 }
 \value{
-A tibble with a single column \code{label} containing unique table headers (excluding \code{"Year"}).
+A character vector containing unique analyte codes.
 }
 \description{
-This function scrapes all table headers from the EPA AirData download page, removes the header \code{"Year"},
-and returns a tibble.
+This function extracts unique analyte codes from the available EPA AirData ZIP file links.
+These analyte codes serve as identifiers for different air quality measurements in the dataset.
+The function supports fetching data from either the live website or an archived snapshot.
 }
 \examples{
 analyte_codes <- get_epa_airdata_analyte_codes()
