@@ -36,7 +36,7 @@
 #' @importFrom tidypollute download_stack_epa_airdata
 #'
 #' @export
-get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "data/", prompt_download=F) {
+get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "data/", prompt_download=F, archive=FALSE, archive_id=NULL) {
   if (missing(analyte) || missing(start_year) || missing(end_year) || missing(freq)) {
     stop("All parameters must be specified: analyte, start_year, end_year, and freq")
   }
@@ -48,7 +48,7 @@ get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "d
   }
 
   # Scrape fresh data links instead of using epa_zip_links
-  zip_links <- tidypollute::get_epa_airdata_zip_links()
+  zip_links <- tidypollute::get_epa_airdata_zip_links(archive=archive, archive_id=archive_id)
 
   # Get the data links for specified analyte and years
   data_links <- zip_links %>%

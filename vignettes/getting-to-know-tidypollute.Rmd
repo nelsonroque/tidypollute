@@ -1,0 +1,44 @@
+---
+title: "tidypollute: Getting to Know the Package"
+author: "Dr. Nelson Roque"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidypollute: Getting to Know the Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# tidypollute: Getting to Know the Package
+
+## Goals of this Notebook
+
+This notebook orients you to `tidypollute` functions in a functional example (pun intended).
+
+------------------------------------------------------------------------
+
+The simplest request retrieves EPA AirData for a specific **analyte** (pollutant) over a given time range (e.g., download daily ozone (44201) data for 1991-1992).
+
+```{r, message=F, warning=F}
+library(tidypollute)
+```
+
+```{r}
+possible_analytes = get_epa_airdata_analyte_codes()
+possible_analytes
+```
+
+```{r, message=F, warning=F}
+library(tidypollute)
+vocs <- get_epa_airdata(analyte = "LEAD", 
+                        start_year = 1991, 
+                        end_year = 1992, 
+                        freq = "daily")
+```
+
+------------------------------------------------------------------------
+
+## Summary
+
+This notebook provides an orientation to the various `tidypollute` functions.
+
+For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).

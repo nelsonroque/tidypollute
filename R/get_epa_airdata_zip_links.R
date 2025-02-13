@@ -10,7 +10,7 @@
 #'   on the Wayback Machine (only used if `archive = TRUE`). Defaults to `"20250126115248"`.
 #'
 #' @return A tibble with structured metadata of available ZIP files.
-#' @import httr rvest dplyr stringr tibble glue rlang
+#' @import rvest dplyr stringr tibble glue rlang
 #' @export
 get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115248") {
 
@@ -23,24 +23,18 @@ get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115
     url <- glue("{base_url}download_files.html")
   }
 
-  # Fetch and parse HTML
-  response <- httr::GET(url, encode = "utf-8")
-  page_content <- content(response, as = "text")
-  html <- read_html(page_content)
+  # Fetch and parse the webpage
+  html <- rvest::read_html(url)
 
-  # Extract ZIP file links
-  # zip_links <- html %>%
-  #   html_nodes("a") %>%
-  #   html_attr("href") %>%
-  #   grep("\\.zip$", ., value = TRUE)
-
+  # Extract ZIP file links and ensure full URLs
   zip_links <- html %>%
-    html_nodes("a") %>%
-    html_attr("href") %>%
-    as_tibble(.name_repair = "minimal") %>%
-    rename(link = .data$value) %>%  # Explicitly name the column
-    filter(grepl("\\.zip$", .data$link)) %>%
-    pull(.data$link)
+    rvest::html_nodes("a") %>%
+    rvest::html_attr("href") %>%
+    tibble::as_tibble(.name_repair = "minimal") %>%
+    dplyr::rename(link = .data$value) %>%  # Explicitly name the column
+    dplyr::filter(grepl("\\.zip$", .data$link)) %>%
+    dplyr::mutate(link = ifelse(grepl("^https?://", link), link, paste0(base_url, link))) %>%  # Convert relative links to absolute URLs
+    dplyr::pull(.data$link)
 
   # Parse ZIP metadata
   zip_links_tbl <- tibble(url = zip_links) %>%
