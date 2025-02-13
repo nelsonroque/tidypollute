@@ -3,6 +3,10 @@
 #' @description
 #' Downloads and stacks EPA air quality data for specified parameters with progress tracking.
 #'
+#' @param archive Logical. If `TRUE`, the function retrieves data from the Wayback Machine
+#'   (Internet Archive) rather than the live EPA AirData website. Defaults to `FALSE`.
+#' @param archive_id Character. The timestamp ID for the archived version of the EPA AirData website
+#'   on the Wayback Machine (only used if `archive = TRUE`). Defaults to `"20250126115248"`.
 #' @param analyte Character string specifying the EPA analyte code (e.g., "88101" for PM2.5)
 #' @param start_year Numeric value for the starting year of data collection
 #' @param end_year Numeric value for the ending year of data collection

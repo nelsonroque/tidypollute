@@ -10,6 +10,9 @@
     <loc>/articles/easy-request.html</loc>
   </url>
   <url>
+    <loc>/articles/getting-to-know-tidypollute.html</loc>
+  </url>
+  <url>
     <loc>/articles/hexsticker.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>/reference/get_epa_airdata_analyte_codes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_epa_airdata_analyte_label.html</loc>
   </url>
   <url>
     <loc>/reference/get_epa_airdata_zip_links.html</loc>
