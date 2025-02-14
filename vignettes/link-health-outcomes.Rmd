@@ -16,30 +16,26 @@ This notebook orients you to `tidypollute` functions in a functional example (pu
 
 ------------------------------------------------------------------------
 
-This request receives data from EPA AirData flat files, for **analyte** (pollutant) == `LEAD` over a given time range.
+This request receives data from EPA AirData flat files, for **analyte** (pollutant) == `LEAD` over a given time range (1999-2000).
 
-```{r, message=F, warning=F}
+```{r, message=F, warning=F, echo=F}
 library(tidypollute)
-```
-
-```{r}
-possible_analytes = get_epa_airdata_analyte_codes()
-possible_analytes
-```
-
-```{r, message=F, warning=F, echo=T}
 lead <- get_epa_airdata(analyte = "LEAD", 
                         start_year = 1999, 
                         end_year = 2000, 
                         freq = "daily")
 ```
 
+## Load participant data
+
+This is sample participant data, where you have a de-identified `participant_id`, other variables (`age`, `smoking_status`, and `dementia` status), and a set of dates for which to compute exposures within (`start_date`, `end_date`). If you need to compute many windows for a given participant, the idea would be to have as many rows in participants_df as you need data lookups for computing exposures.
+
 ```{r}
 
 participants_df <- tibble::tibble(
   participant_id = 1:5,
-  start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
-  end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
+  start_date = as.Date(c("1999-06-01", "1999-01-01", "1999-03-15", "1999-07-10", "1999-09-20")),
+  end_date = as.Date(c("2000-12-31", "2000-12-31", "2000-09-30", "2000-05-20", "2000-06-15")),
   age = c(65, 72, 50, 60, 58),
   smoking_status = c("Never", "Former", "Current", "Never", "Former"),
   dementia = c(0,1,1,0,1)
@@ -48,20 +44,19 @@ participants_df <- tibble::tibble(
 ```
 
 ```{r}
-exposure_df = summarise_exposure(participants_df,
-                               air_quality_df="",
-                               date_col="",
-                               pollutant_col="",
-                               start_col="",
-                               end_col="",
-                               group_vars = NULL)
+exposure_df = summarise_exposure(participants_df=participants_df,
+                               air_quality_df=lead,
+                               date_col="date_local",
+                               pollutant_col="arithmetic_mean",
+                               start_col="start_date",
+                               end_col="end_date",
+                               group_vars = c("participant_id", "age", "smoking_status", "dementia"))
 ```
-≈
 
 ------------------------------------------------------------------------
 
 ## Summary
 
-This notebook provides an orientation to the various `tidypollute` functions.
+This notebook provides an orientation how you can leverage `tidypollute` data and merge with participant/health outcome data.
 
 For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).

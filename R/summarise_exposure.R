@@ -1,4 +1,4 @@
-#' Compute Air Pollutant Exposure for Participants
+#' Compute Air Pollutant Exposure for Given Time Windows
 #'
 #' This function calculates the mean exposure to an air pollutant for each participant
 #' based on their recorded start and end dates.
@@ -51,6 +51,7 @@ summarise_exposure <- function(participants_df,
                                start_col,
                                end_col,
                                group_vars = NULL) {
+  library(dplyr)
 
   # Convert column names to symbols
   date_col <- sym(date_col)
@@ -63,16 +64,43 @@ summarise_exposure <- function(participants_df,
     group_vars <- syms(group_vars)
   }
 
-  # Rename air quality data date column to avoid conflicts
+  # Rename air quality date column to avoid conflicts
   air_quality_df <- air_quality_df %>%
     rename(air_quality_date = !!date_col)
 
-  # Join and filter based on exposure window
+  # Perform a proper join and filter based on exposure window
   exposure_df <- participants_df %>%
-    left_join(air_quality_df, by = character()) %>%
-    filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
-    group_by(!!start_col, !!end_col, !!!group_vars) %>%
-    summarise(mean_exposure = mean(!!pollutant_col, na.rm = TRUE), .groups = "drop")
+    rowwise() %>% # Ensure filtering happens per participant
+    mutate(mean_exposure = mean(
+      air_quality_df %>%
+        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        pull(!!pollutant_col),
+      na.rm = TRUE
+    )) %>%
+    mutate(median_exposure = median(
+      air_quality_df %>%
+        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        pull(!!pollutant_col),
+      na.rm = TRUE
+    )) %>%
+    mutate(sd_exposure = sd(
+      air_quality_df %>%
+        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        pull(!!pollutant_col),
+      na.rm = TRUE
+    )) %>%
+    mutate(n_exposure_records = sum(
+      (air_quality_df %>%
+        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        pull(!!pollutant_col)) %>%
+        is.finite(),
+      na.rm = TRUE
+    )) %>%
+    ungroup()
+
+  # Select relevant columns
+  exposure_df <- exposure_df %>%
+    select(!!!group_vars, mean_exposure, median_exposure, sd_exposure, n_exposure_records)
 
   return(exposure_df)
 }
