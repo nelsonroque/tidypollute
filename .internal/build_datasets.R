@@ -38,13 +38,17 @@ epa_airdata_monitoring_sites = epa_airdata_links %>%
   filter(analyte == "sites") %>%
   tidypollute::download_stack_epa_airdata(clean_names = F)
 
+epa_analyte_codes = tibble::tibble(analyte = tidypollute::get_epa_airdata_analyte_codes() %>%
+  setdiff(c("sites", "monitors")))
+
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-# Save as an .rda file inside the 'data/' folder\
+# Save as an .rda file inside the 'data/' folder
 usethis::use_data(us_states, overwrite=TRUE)
 usethis::use_data(epa_airdata_links, overwrite = TRUE)
 usethis::use_data(epa_airdata_links_archive, overwrite = TRUE)
 usethis::use_data(epa_airdata_monitoring_sites, overwrite = TRUE)
+usethis::use_data(epa_analyte_codes, overwrite=TRUE)
 #usethis::use_data(epa_superfund_npl_sites, overwrite = TRUE)
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

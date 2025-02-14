@@ -10,6 +10,7 @@ reference:
 - contents:
   - starts_with("get")
   - starts_with("download")
+  - starts_with("summarise")
 - subtitle: EPA Datasets
   desc: Built-in EPA datasets for easy usage.
   contents:

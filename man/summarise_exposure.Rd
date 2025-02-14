@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarise_exposure.R
 \name{summarise_exposure}
 \alias{summarise_exposure}
-\title{Compute Air Pollutant Exposure for Participants}
+\title{Compute Air Pollutant Exposure for Given Time Windows}
 \usage{
 summarise_exposure(
   participants_df,

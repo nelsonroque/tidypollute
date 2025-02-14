@@ -18,6 +18,8 @@ Imports:
     janitor,
     rlang
 Suggests:
+    sf,
+    tidycensus,
     lubridate,
     digest,
     extrafont,
