@@ -19,6 +19,9 @@
     <loc>/articles/index.html</loc>
   </url>
   <url>
+    <loc>/articles/link-health-outcomes.html</loc>
+  </url>
+  <url>
     <loc>/articles/tidycensus.html</loc>
   </url>
   <url>
@@ -46,6 +49,9 @@
     <loc>/reference/epa_airdata_monitoring_sites.html</loc>
   </url>
   <url>
+    <loc>/reference/epa_analyte_codes.html</loc>
+  </url>
+  <url>
     <loc>/reference/epa_superfund_npl_sites.html</loc>
   </url>
   <url>
@@ -61,6 +67,9 @@
     <loc>/reference/get_epa_airdata_analyte_label.html</loc>
   </url>
   <url>
+    <loc>/reference/get_epa_airdata_analyte_tibble.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_epa_airdata_zip_links.html</loc>
   </url>
   <url>
@@ -68,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/scrape_epa_airdata_zip_links.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summarise_exposure.html</loc>
   </url>
   <url>
     <loc>/reference/us_states.html</loc>

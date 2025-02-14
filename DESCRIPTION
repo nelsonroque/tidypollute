@@ -9,8 +9,12 @@ Language: en-US
 License: GPL-3
 Encoding: UTF-8
 Imports: 
-    dplyr, glue, readr, purrr, 
-    stringr, tibble, 
+    dplyr, 
+    glue, 
+    readr, 
+    purrr, 
+    stringr, 
+    tibble, 
     rvest, 
     httr, 
     httr2, 

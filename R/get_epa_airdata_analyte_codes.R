@@ -34,15 +34,10 @@ get_epa_airdata_analyte_label <- function() {
   return(headers_tibble)
 }
 
-#' Retrieve Unique Analyte Codes from EPA AirData Archive
+#' Retrieve Unique Analyte Codes from EPA AirData
 #'
 #' This function extracts unique analyte codes from the available EPA AirData ZIP file links.
 #' These analyte codes serve as identifiers for different air quality measurements in the dataset.
-#' The function supports fetching data from either the live website or an archived snapshot.
-#'
-#' @param archive Logical. If `TRUE`, retrieves analyte codes from an archived version of the dataset.
-#' @param archive_id Character. The specific archive snapshot ID to use when `archive = TRUE`.
-#'        Default is `"20250126115248"`, referring to the most recent known snapshot at the time of documentation.
 #'
 #' @return A character vector containing unique analyte codes.
 #' @importFrom dplyr select pull
@@ -51,7 +46,7 @@ get_epa_airdata_analyte_label <- function() {
 #' @examples
 #' analyte_codes <- get_epa_airdata_analyte_codes()
 #' print(analyte_codes)
-get_epa_airdata_analyte_codes <- function(archive = FALSE, archive_id = "20250126115248") {
+get_epa_airdata_analyte_codes <- function() {
   # Retrieve ZIP file links containing air quality data
   zip_links <- epa_airdata_links
 
