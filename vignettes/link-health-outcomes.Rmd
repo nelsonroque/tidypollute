@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: Getting to Know the Package"
+title: "tidypollute: Linking to Health Outcomes/Patient Data"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: Getting to Know the Package}
+  %\VignetteIndexEntry{tidypollute: Linking to Health Outcomes/Patient Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
