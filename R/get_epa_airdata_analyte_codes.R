@@ -53,7 +53,7 @@ get_epa_airdata_analyte_label <- function() {
 #' print(analyte_codes)
 get_epa_airdata_analyte_codes <- function(archive = FALSE, archive_id = "20250126115248") {
   # Retrieve ZIP file links containing air quality data
-  zip_links <- get_epa_airdata_zip_links(archive = archive, archive_id = archive_id)
+  zip_links <- epa_airdata_links
 
   # Extract distinct analyte codes from the dataset
   distinct_analytes <- zip_links %>%

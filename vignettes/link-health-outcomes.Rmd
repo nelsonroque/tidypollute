@@ -1,0 +1,67 @@
+---
+title: "tidypollute: Getting to Know the Package"
+author: "Dr. Nelson Roque"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidypollute: Getting to Know the Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# tidypollute: Getting to Know the Package
+
+## Goals of this Notebook
+
+This notebook orients you to `tidypollute` functions in a functional example (pun intended).
+
+------------------------------------------------------------------------
+
+This request receives data from EPA AirData flat files, for **analyte** (pollutant) == `LEAD` over a given time range.
+
+```{r, message=F, warning=F}
+library(tidypollute)
+```
+
+```{r}
+possible_analytes = get_epa_airdata_analyte_codes()
+possible_analytes
+```
+
+```{r, message=F, warning=F, echo=T}
+lead <- get_epa_airdata(analyte = "LEAD", 
+                        start_year = 1999, 
+                        end_year = 2000, 
+                        freq = "daily")
+```
+
+```{r}
+
+participants_df <- tibble::tibble(
+  participant_id = 1:5,
+  start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
+  end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
+  age = c(65, 72, 50, 60, 58),
+  smoking_status = c("Never", "Former", "Current", "Never", "Former"),
+  dementia = c(0,1,1,0,1)
+)
+
+```
+
+```{r}
+exposure_df = summarise_exposure(participants_df,
+                               air_quality_df="",
+                               date_col="",
+                               pollutant_col="",
+                               start_col="",
+                               end_col="",
+                               group_vars = NULL)
+```
+≈
+
+------------------------------------------------------------------------
+
+## Summary
+
+This notebook provides an orientation to the various `tidypollute` functions.
+
+For more details, check out [`tidypollute` documentation](https://nelsonroque.github.io/tidypollute/index.html).
