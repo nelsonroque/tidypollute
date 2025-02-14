@@ -43,7 +43,7 @@ participants_df <- tibble::tibble(
 
 ```
 
-```{r}
+```{r, echo=F, message=F, warning=F}
 exposure_df = summarise_exposure(participants_df=participants_df,
                                air_quality_df=lead,
                                date_col="date_local",
@@ -51,6 +51,11 @@ exposure_df = summarise_exposure(participants_df=participants_df,
                                start_col="start_date",
                                end_col="end_date",
                                group_vars = c("participant_id", "age", "smoking_status", "dementia"))
+
+```
+
+```{r}
+exposure_df
 ```
 
 ------------------------------------------------------------------------
