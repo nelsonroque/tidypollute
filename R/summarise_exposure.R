@@ -54,6 +54,7 @@
 #' )
 #'
 #' print(exposure_results)
+
 summarise_exposure <- function(participants_df,
                                air_quality_df,
                                date_col,
@@ -63,6 +64,7 @@ summarise_exposure <- function(participants_df,
                                county_name = "county",
                                state_name = "state",
                                group_vars = NULL) {
+
   if (!(county_name %in% names(air_quality_df))) {
     stop(glue::glue("Column `{county_name}` not found in `air_quality_df`."))
   }
