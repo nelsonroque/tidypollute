@@ -17,11 +17,10 @@ A tibble with the following columns:
 epa_analyte_codes
 }
 \description{
-This dataset contains metadata for all downloadable ZIP files from the EPA AirData website.
-The metadata includes file links, year, unit of analysis, analyte type, and human-readable descriptions.
+This dataset contains the queryable names for EPA analytes from the EPA AirData website.
 }
 \examples{
 data(epa_analyte_codes)
-head(epa_analyte_codes)
+epa_analyte_codes
 }
 \keyword{datasets}

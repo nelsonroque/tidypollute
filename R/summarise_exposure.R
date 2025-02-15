@@ -14,6 +14,7 @@
 #' @param group_vars A character vector of additional grouping variables from `participants_df` (e.g., participant ID, age, smoking status). Default is `NULL`.
 #' @import dplyr
 #' @importFrom stats median sd
+#' @importFrom glue glue
 #' @return A tibble containing the mean exposure for each participant during their study period.
 #' @export
 #'
@@ -45,8 +46,8 @@
 #'   pollutant_col = "pm25_level",
 #'   start_col = "start_date",
 #'   end_col = "end_date",
-#'   county_name = "county_name",
-#'   state_name = "state_name",
+#'   county_name = "county",
+#'   state_name = "state",
 #'   group_vars = c("participant_id", "age", "smoking_status")
 #' )
 #'
@@ -58,9 +59,17 @@ summarise_exposure <- function(participants_df,
                                pollutant_col,
                                start_col,
                                end_col,
-                               county_name="county_name",
-                               state_name="state_name",
+                               county_name = "county",
+                               state_name = "state",
                                group_vars = NULL) {
+
+  if (!(as_string(county_name) %in% names(air_quality_df))) {
+    stop(glue::glue("Column `{as_string(county_name)}` not found in `air_quality_df`."))
+  }
+
+  if (!(as_string(state_name) %in% names(air_quality_df))) {
+    stop(glue::glue("Column `{as_string(state_name)}` not found in `air_quality_df`."))
+  }
 
   # Convert column names to symbols
   date_col <- sym(date_col)
@@ -85,8 +94,8 @@ summarise_exposure <- function(participants_df,
     mutate(exposure_data = list(
       air_quality_df %>%
         filter(.data$air_quality_date >= !!start_col & .data$air_quality_date <= !!end_col) %>%
-        filter(.data[[as_string(county_name)]] == cur_data()[[as_string(county_name)]],
-               .data[[as_string(state_name)]] == cur_data()[[as_string(state_name)]]) %>%
+        filter(.data[[as_string(county_name)]] == cur_group()[[as_string(county_name)]],
+               .data[[as_string(state_name)]] == cur_group()[[as_string(state_name)]]) %>%
         pull(!!pollutant_col)
     )) %>%
     mutate(
