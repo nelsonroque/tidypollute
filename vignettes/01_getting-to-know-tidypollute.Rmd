@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: [01] Getting to Know the Package"
+title: "tidypollute: Getting to Know the Package"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: [01] Getting to Know the Package}
+  %\VignetteIndexEntry{tidypollute: Getting to Know the Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -24,7 +24,7 @@ library(tidypollute)
 
 ## Get Analyte Codes
 ```{r}
-possible_analytes = tidypollute::epa_analyte_codes
+tidypollute::epa_analyte_codes
 ```
 
 ## Get Zip Links for all Files

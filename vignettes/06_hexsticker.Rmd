@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: [03] Making of the Hex Logo!"
+title: "tidypollute: Making of the Hex Logo!"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: [03] Making of the Hex Logo!}
+  %\VignetteIndexEntry{tidypollute: Making of the Hex Logo!}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
