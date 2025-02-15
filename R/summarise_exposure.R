@@ -93,7 +93,8 @@ summarise_exposure <- function(participants_df,
   # Merge and filter by date range efficiently
   exposure_df <- participants_df %>%
     left_join(air_quality_df, by = c(county_name, state_name)) %>%
-    filter(air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]]) %>%
+    filter(.data$air_quality_date >= .data[[start_col]] & .data$air_quality_date <= .data[[end_col]]) %>%
+    #filter(air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]]) %>%
     group_by(across(all_of(group_vars))) %>%
     summarise(
       mean_exposure = mean(.data[[pollutant_col]], na.rm = TRUE),
