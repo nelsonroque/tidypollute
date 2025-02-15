@@ -96,6 +96,8 @@ Thank you, Karishma Christmas, for your documentation support.
 📌 [EPA Daily Air Quality Reports](https://www.epa.gov/outdoor-air-quality-data/air-data-daily-air-quality-tracker-pdf-report)  
 📌 [Census Reference Files](https://www.census.gov/geographies/reference-files.html)  
 📌 [Census GEOIDs](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)
+📌 [AQI Colors](https://www.airnow.gov/aqi/aqi-basics/)
+📌 [EPA Air Quality Webcams](https://www.airnow.gov/resources/web-cams/)
 
 ---
 

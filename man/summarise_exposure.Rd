@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarise_exposure.R
 \name{summarise_exposure}
 \alias{summarise_exposure}
-\title{Compute Air Pollutant Exposure for Given Time Windows}
+\title{Compute Air Pollutant Exposure for Given Time Windows (County-level aggregation)}
 \usage{
 summarise_exposure(
   participants_df,
@@ -42,7 +42,7 @@ participant during their study period, along with the number of valid exposure r
 }
 \description{
 This function calculates the mean, median, and standard deviation of exposure
-to an air pollutant for each participant based on their recorded start and end dates.
+to an air pollutant for each participant based on their recorded start and end dates, and county/state.
 }
 \examples{
 library(tidyverse)
