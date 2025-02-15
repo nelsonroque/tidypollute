@@ -1,7 +1,7 @@
 #' Compute Air Pollutant Exposure for Given Time Windows
 #'
-#' This function calculates the mean exposure to an air pollutant for each participant
-#' based on their recorded start and end dates.
+#' This function calculates the mean, median, and standard deviation of exposure
+#' to an air pollutant for each participant based on their recorded start and end dates.
 #'
 #' @param participants_df A dataframe containing participant information, including start and end dates.
 #' @param air_quality_df A dataframe containing air quality measurements, with date and pollutant values.
@@ -11,11 +11,16 @@
 #' @param end_col A string specifying the column name in `participants_df` that contains the end date.
 #' @param county_name A string specifying the column name in `participants_df` and `air_quality_df` that contains county names.
 #' @param state_name A string specifying the column name in `participants_df` and `air_quality_df` that contains state names.
-#' @param group_vars A character vector of additional grouping variables from `participants_df` (e.g., participant ID, age, smoking status). Default is `NULL`.
+#' @param group_vars A character vector of additional grouping variables from `participants_df`
+#'   (e.g., participant ID, age, smoking status). Default is `NULL`.
+#'
 #' @import dplyr
-#' @importFrom stats median sd
+#' @importFrom purrr map
 #' @importFrom glue glue
-#' @return A tibble containing the mean exposure for each participant during their study period.
+#' @importFrom stats median sd
+#'
+#' @return A tibble containing the mean, median, and standard deviation of exposure for each
+#'   participant during their study period, along with the number of valid exposure records.
 #' @export
 #'
 #' @examples
@@ -25,8 +30,8 @@
 #' air_quality_df <- tibble(
 #'   date = seq(as.Date("2000-01-01"), as.Date("2020-12-31"), by = "day"),
 #'   pm25_level = runif(length(date), min = 5, max = 80),
-#'   county = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
-#'   state = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
+#'   county_name = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
+#'   state_name = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
 #' )
 #'
 #' # Example participants data
@@ -35,8 +40,8 @@
 #'   start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
 #'   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
 #'   age = c(65, 72, 50, 60, 58),
-#'   county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
-#'   state = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
+#'   county_name = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
+#'   state_name = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
 #'   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 #' )
 #'
@@ -48,8 +53,8 @@
 #'   pollutant_col = "pm25_level",
 #'   start_col = "start_date",
 #'   end_col = "end_date",
-#'   county_name = "county",
-#'   state_name = "state",
+#'   county_name = "county_name",
+#'   state_name = "state_name",
 #'   group_vars = c("participant_id", "age", "smoking_status")
 #' )
 #'
@@ -77,29 +82,29 @@ summarise_exposure <- function(participants_df,
   air_quality_df <- air_quality_df %>%
     rename(air_quality_date = !!sym(date_col))
 
+  # Ensure start and end dates are properly formatted
+  participants_df <- participants_df %>%
+    mutate(across(c(start_col, end_col), as.Date))
+
   # Compute exposure per participant
   exposure_df <- participants_df %>%
     rowwise() %>%
     mutate(
-      participant_county = .data[[county_name]],
-      participant_state = .data[[state_name]]) %>%
-    mutate(
       exposure_data = list(
-        {
-          filtered_data <- air_quality_df %>%
-            filter(air_quality_date >= cur_data()[[start_col]] & air_quality_date <= cur_data()[[end_col]]) %>%
-            filter(.data[[county_name]] == participant_county & .data[[state_name]] == participant_state) %>%
-            pull(!!sym(pollutant_col))
-
-          if (length(filtered_data) == 0) NA_real_ else filtered_data
-        }
+        air_quality_df %>%
+          filter(
+            air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]],
+            .data[[county_name]] == .env$participant_county,
+            .data[[state_name]] == .env$participant_state
+          ) %>%
+          pull(!!sym(pollutant_col))
       )
-    )
+    ) %>%
     mutate(
-      mean_exposure = ifelse(length(exposure_data) > 0, mean(exposure_data, na.rm = TRUE), NA_real_),
-      median_exposure = ifelse(length(exposure_data) > 0, stats::median(exposure_data, na.rm = TRUE), NA_real_),
-      sd_exposure = ifelse(length(exposure_data) > 0, stats::sd(exposure_data, na.rm = TRUE), NA_real_),
-      n_exposure_records = ifelse(length(exposure_data) > 0, sum(is.finite(exposure_data), na.rm = TRUE), 0)
+      mean_exposure = ifelse(length(unlist(exposure_data)) > 0, mean(unlist(exposure_data), na.rm = TRUE), NA_real_),
+      median_exposure = ifelse(length(unlist(exposure_data)) > 0, stats::median(unlist(exposure_data), na.rm = TRUE), NA_real_),
+      sd_exposure = ifelse(length(unlist(exposure_data)) > 0, stats::sd(unlist(exposure_data), na.rm = TRUE), NA_real_),
+      n_exposure_records = length(unlist(exposure_data))
     ) %>%
     select(!!!syms(group_vars), mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
     ungroup()
