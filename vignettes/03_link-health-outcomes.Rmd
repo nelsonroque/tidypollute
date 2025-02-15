@@ -33,6 +33,7 @@ lead <- get_epa_airdata(
 This is sample participant data, where you have a de-identified `participant_id`, other variables (`age`, `smoking_status`, and `dementia` status), and a set of dates for which to compute exposures within (`start_date`, `end_date`). If you need to compute many windows for a given participant, the idea would be to have as many rows in participants_df as you need data lookups for computing exposures.
 
 ```{r, msg=F, warning=F}
+library(dplyr)
 participants_df <- tibble::tibble(
   participant_id = 1:5,
   start_date = as.Date(c("1999-06-01", "1999-01-01", "1999-03-15", "1999-07-10", "1999-09-20")),

@@ -1,14 +1,29 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^.*\.bib$
-^paper\.md$
-^paper\.pdf$
-^_pkgdown\.yml$
-^build\.R$
-^docs$
-^examples$
-^pkgdown$
-^cran-comments\.md$
-^CRAN-SUBMISSION$
-^\.github$
-^\.internal$
+# Project-specific files
+^.*\.Rproj$        # RStudio project file
+^\.Rproj\.user$    # RStudio user-specific settings
+
+# Bibliography and manuscript files
+^.*\.bib$          # Bibliography files
+^paper\.md$        # Manuscript in Markdown
+^paper\.pdf$       # Manuscript in PDF
+
+# Package documentation and build configuration
+^_pkgdown\.yml$    # pkgdown configuration file
+^build\.R$         # Script for building the package
+
+# Ignoring directories
+^examples$         # Example scripts or data
+^pkgdown$          # Generated pkgdown site
+^docs$             # Documentation folder
+
+# Ignoring specific file types within docs
+^docs/.*\.Rmd$     # R Markdown files inside docs
+^docs/.*\.html$    # HTML files inside docs
+
+# CRAN-related files
+^cran-comments\.md$  # CRAN submission comments
+^CRAN-SUBMISSION$    # CRAN submission metadata
+
+# Internal files and GitHub-related folders
+^\.github$         # GitHub workflows, issue templates, etc.
+^\.internal$       # Internal files, possibly for dev use
