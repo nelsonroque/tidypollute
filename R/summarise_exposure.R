@@ -70,48 +70,38 @@ summarise_exposure <- function(participants_df,
                                state_name = "state",
                                group_vars = NULL) {
 
-  # Ensure necessary columns exist in participants_df
-  missing_cols <- setdiff(c(start_col, end_col, county_name, state_name), names(participants_df))
+  # Ensure necessary columns exist
+  required_cols <- c(start_col, end_col, county_name, state_name)
+  missing_cols <- setdiff(required_cols, names(participants_df))
   if (length(missing_cols) > 0) {
-    stop(glue::glue("Missing columns in `participants_df`: {paste(missing_cols, collapse = ', ')}"))
+    stop(glue("Missing columns in `participants_df`: {paste(missing_cols, collapse = ', ')}"))
   }
 
-  # Ensure necessary columns exist in air_quality_df
-  missing_cols_air <- setdiff(c(date_col, pollutant_col, county_name, state_name), names(air_quality_df))
-  if (length(missing_cols_air) > 0) {
-    stop(glue::glue("Missing columns in `air_quality_df`: {paste(missing_cols_air, collapse = ', ')}"))
+  required_air_cols <- c(date_col, pollutant_col, county_name, state_name)
+  missing_air_cols <- setdiff(required_air_cols, names(air_quality_df))
+  if (length(missing_air_cols) > 0) {
+    stop(glue("Missing columns in `air_quality_df`: {paste(missing_air_cols, collapse = ', ')}"))
   }
 
-  # Rename air quality date column to avoid conflicts
-  air_quality_df <- air_quality_df %>%
-    rename(air_quality_date = !!sym(date_col))
-
-  # Ensure start and end dates are properly formatted
+  # Convert columns to Date format
   participants_df <- participants_df %>%
     mutate(across(all_of(c(start_col, end_col)), as.Date))
 
-  # Compute exposure per participant
+  air_quality_df <- air_quality_df %>%
+    mutate(air_quality_date = as.Date(.data[[date_col]]))
+
+  # Merge and filter by date range efficiently
   exposure_df <- participants_df %>%
-    rowwise() %>%
-    mutate(
-      exposure_data = list(
-        air_quality_df %>%
-          filter(
-            air_quality_date >= cur_data()[[start_col]] & air_quality_date <= cur_data()[[end_col]],
-            .data[[county_name]] == cur_data()[[county_name]],
-            .data[[state_name]] == cur_data()[[state_name]]
-          ) %>%
-          pull(!!sym(pollutant_col))
-      )
-    ) %>%
-    mutate(
-      mean_exposure = ifelse(length(unlist(exposure_data)) > 0, mean(unlist(exposure_data), na.rm = TRUE), NA_real_),
-      median_exposure = ifelse(length(unlist(exposure_data)) > 0, stats::median(unlist(exposure_data), na.rm = TRUE), NA_real_),
-      sd_exposure = ifelse(length(unlist(exposure_data)) > 0, stats::sd(unlist(exposure_data), na.rm = TRUE), NA_real_),
-      n_exposure_records = length(unlist(exposure_data))
-    ) %>%
-    select(!!!syms(group_vars), mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
-    ungroup()
+    left_join(air_quality_df, by = c(county_name, state_name)) %>%
+    filter(air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]]) %>%
+    group_by(across(all_of(group_vars))) %>%
+    summarise(
+      mean_exposure = mean(.data[[pollutant_col]], na.rm = TRUE),
+      median_exposure = median(.data[[pollutant_col]], na.rm = TRUE),
+      sd_exposure = sd(.data[[pollutant_col]], na.rm = TRUE),
+      n_exposure_records = sum(!is.na(.data[[pollutant_col]])),
+      .groups = "drop"
+    )
 
   return(exposure_df)
 }
