@@ -11,8 +11,8 @@ summarise_exposure(
   pollutant_col,
   start_col,
   end_col,
-  county_name = "county_name",
-  state_name = "state_name",
+  county_name = "county",
+  state_name = "state",
   group_vars = NULL
 )
 }
@@ -70,8 +70,8 @@ exposure_results <- summarise_exposure(
   pollutant_col = "pm25_level",
   start_col = "start_date",
   end_col = "end_date",
-  county_name = "county_name",
-  state_name = "state_name",
+  county_name = "county",
+  state_name = "state",
   group_vars = c("participant_id", "age", "smoking_status")
 )
 

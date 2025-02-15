@@ -9,8 +9,8 @@
 #' @param pollutant_col A string specifying the column name in `air_quality_df` that contains pollutant values.
 #' @param start_col A string specifying the column name in `participants_df` that contains the start date.
 #' @param end_col A string specifying the column name in `participants_df` that contains the end date.
-#' @param county_name A string specifying the column name in `air_quality_df` that contains county names.
-#' @param state_name A string specifying the column name in `air_quality_df` that contains state names.
+#' @param county_name A string specifying the column name in `participants_df` and `air_quality_df` that contains county names.
+#' @param state_name A string specifying the column name in `participants_df` and `air_quality_df` that contains state names.
 #' @param group_vars A character vector of additional grouping variables from `participants_df` (e.g., participant ID, age, smoking status). Default is `NULL`.
 #' @import dplyr
 #' @importFrom stats median sd
@@ -24,7 +24,9 @@
 #' # Example air quality data (PM2.5 levels)
 #' air_quality_df <- tibble(
 #'   date = seq(as.Date("2000-01-01"), as.Date("2020-12-31"), by = "day"),
-#'   pm25_level = runif(length(date), min = 5, max = 80)
+#'   pm25_level = runif(length(date), min = 5, max = 80),
+#'   county = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
+#'   state = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
 #' )
 #'
 #' # Example participants data
@@ -63,48 +65,38 @@ summarise_exposure <- function(participants_df,
                                state_name = "state",
                                group_vars = NULL) {
 
-  if (!(as_string(county_name) %in% names(air_quality_df))) {
-    stop(glue::glue("Column `{as_string(county_name)}` not found in `air_quality_df`."))
+  if (!(county_name %in% names(air_quality_df))) {
+    stop(glue::glue("Column `{county_name}` not found in `air_quality_df`."))
   }
 
-  if (!(as_string(state_name) %in% names(air_quality_df))) {
-    stop(glue::glue("Column `{as_string(state_name)}` not found in `air_quality_df`."))
-  }
-
-  # Convert column names to symbols
-  date_col <- sym(date_col)
-  pollutant_col <- sym(pollutant_col)
-  start_col <- sym(start_col)
-  end_col <- sym(end_col)
-  county_name <- sym(county_name)
-  state_name <- sym(state_name)
-
-  # Ensure group_vars is a character vector
-  if (!is.null(group_vars)) {
-    group_vars <- syms(group_vars)
+  if (!(state_name %in% names(air_quality_df))) {
+    stop(glue::glue("Column `{state_name}` not found in `air_quality_df`."))
   }
 
   # Rename air quality date column to avoid conflicts
   air_quality_df <- air_quality_df %>%
-    rename(air_quality_date = !!date_col)
+    rename(air_quality_date = !!sym(date_col))
 
   # Compute exposure per participant
   exposure_df <- participants_df %>%
     rowwise() %>%
-    mutate(exposure_data = list(
-      air_quality_df %>%
-        filter(.data$air_quality_date >= !!start_col & .data$air_quality_date <= !!end_col) %>%
-        filter(.data[[as_string(county_name)]] == cur_group()[[as_string(county_name)]],
-               .data[[as_string(state_name)]] == cur_group()[[as_string(state_name)]]) %>%
-        pull(!!pollutant_col)
-    )) %>%
+    mutate(
+      participant_county = .data[[county_name]],
+      participant_state = .data[[state_name]],
+      exposure_data = list(
+        air_quality_df %>%
+          filter(air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]]) %>%
+          filter(.data[[county_name]] == participant_county & .data[[state_name]] == participant_state) %>%
+          pull(!!sym(pollutant_col))
+      )
+    ) %>%
     mutate(
       mean_exposure = mean(exposure_data, na.rm = TRUE),
       median_exposure = stats::median(exposure_data, na.rm = TRUE),
       sd_exposure = stats::sd(exposure_data, na.rm = TRUE),
       n_exposure_records = sum(is.finite(exposure_data), na.rm = TRUE)
     ) %>%
-    select(!!!group_vars, mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
+    select(!!!syms(group_vars), mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
     ungroup()
 
   return(exposure_df)
