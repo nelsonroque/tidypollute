@@ -82,14 +82,19 @@ summarise_exposure <- function(participants_df,
     rowwise() %>%
     mutate(
       participant_county = .data[[county_name]],
-      participant_state = .data[[state_name]],
+      participant_state = .data[[state_name]]) %>%
+    mutate(
       exposure_data = list(
-        air_quality_df %>%
-          filter(air_quality_date >= cur_data()[[start_col]] & air_quality_date <= cur_data()[[end_col]]) %>%
-          filter(.data[[county_name]] == participant_county & .data[[state_name]] == participant_state) %>%
-          pull(!!sym(pollutant_col))
+        {
+          filtered_data <- air_quality_df %>%
+            filter(air_quality_date >= cur_data()[[start_col]] & air_quality_date <= cur_data()[[end_col]]) %>%
+            filter(.data[[county_name]] == participant_county & .data[[state_name]] == participant_state) %>%
+            pull(!!sym(pollutant_col))
+
+          if (length(filtered_data) == 0) NA_real_ else filtered_data
+        }
       )
-    ) %>%
+    )
     mutate(
       mean_exposure = ifelse(length(exposure_data) > 0, mean(exposure_data, na.rm = TRUE), NA_real_),
       median_exposure = ifelse(length(exposure_data) > 0, stats::median(exposure_data, na.rm = TRUE), NA_real_),
