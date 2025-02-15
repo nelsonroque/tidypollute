@@ -1,6 +1,6 @@
 Package: tidypollute
 Title: Make simpler working with environmental data products
-Version: 0.1.24
+Version: 0.1.25
 Authors@R: 
     person("Nelson", "Roque", , "nur375@psu.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1184-202X"))
