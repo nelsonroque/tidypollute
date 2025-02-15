@@ -1,9 +1,9 @@
 ---
-title: "06: tidypollute: Making of the Hex Logo!"
+title: "06: tidypollute: Making of the Original Hex Logo!"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{06: tidypollute: Making of the Hex Logo!}
+  %\VignetteIndexEntry{06: tidypollute: Making of the Original Hex Logo!}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -11,6 +11,10 @@ vignette: >
 # Getting Started with `tidypollute`
 
 ## Goals of this Notebook
+
+Create the original Hex logo for the `tidypollute` package. The logo was revised via a custom illustration but the original logo was made using the `hexSticker` package.
+
+The original logo is based on air pollution data from the EPA for Tampa, Florida in 1991, where the package author was born.
 
 ```{r, message=F, warning=F}
 
