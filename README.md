@@ -100,3 +100,8 @@ Thank you, Karishma Christmas, for your documentation support.
 ---
 
 Ready to make sense of air quality data the **tidy way**? 🌱 Let's go! 🚀
+
+---
+
+Anyone want to help with the logo?
+https://www.canva.com/design/DAGfIpmrLEA/Z0-kZNH66JDBZgp0PIlfMw/edit
