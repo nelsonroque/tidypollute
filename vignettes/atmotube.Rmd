@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: Getting Started with the Atmotube Cloud API"
+title: "tidypollute: [06] Getting Started with the Atmotube Cloud API"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: Getting Started with the Atmotube Cloud API}
+  %\VignetteIndexEntry{tidypollute: [06] Getting Started with the Atmotube Cloud API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

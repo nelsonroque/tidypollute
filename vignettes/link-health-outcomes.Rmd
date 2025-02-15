@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: Linking to Health Outcomes/Patient Data"
+title: "tidypollute: [04] Linking to Health Outcomes/Patient Data"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: Linking to Health Outcomes/Patient Data}
+  %\VignetteIndexEntry{tidypollute: [04] Linking to Health Outcomes/Patient Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -39,8 +39,8 @@ participants_df <- tibble::tibble(
   end_date = as.Date(c("2000-12-31", "2000-12-31", "2000-09-30", "2000-05-20", "2000-06-15")),
   age = c(65, 72, 50, 60, 58),
   smoking_status = c("Never", "Former", "Current", "Never", "Former"),
-  county = c("Kern", "Miami-Dade", "Broward", "Miami-Dade", "Broward"),
-  state = c("California", "Florida", "Florida", "Florida", "Florida"),
+  county_name = c("Kern", "Miami-Dade", "Broward", "Miami-Dade", "Broward"),
+  state_name = c("California", "Florida", "Florida", "Florida", "Florida"),
   dementia = c(0, 1, 1, 0, 1)
 )
 ```
@@ -53,8 +53,8 @@ exposure_df <- summarise_exposure(
   pollutant_col = "arithmetic_mean",
   start_col = "start_date",
   end_col = "end_date",
-  county_name = "county",
-  state_name = "state",
+  county_name = "county_name",
+  state_name = "state_name",
   group_vars = c("participant_id", "age", "smoking_status", "dementia")
 )
 ```

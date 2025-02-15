@@ -1,9 +1,9 @@
 ---
-title: "tidypollute: Getting Started"
+title: "tidypollute: [02] Getting Started with a Simple Request"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute: Getting Started}
+  %\VignetteIndexEntry{tidypollute: [02] Getting Started with a Simple Request}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
