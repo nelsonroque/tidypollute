@@ -7,6 +7,7 @@
 \format{
 A tibble with the following columns:
 \describe{
+\item{label}{The label for the pollutant or air quality measure extracted from the filename.}
 \item{analyte}{The pollutant or air quality measure extracted from the filename.}
 }
 }
