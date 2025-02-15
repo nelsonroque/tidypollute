@@ -31,7 +31,8 @@ get_epa_airdata_zip_links <- function(archive = FALSE, archive_id = "20250126115
     rvest::html_nodes("a") %>%
     rvest::html_attr("href") %>%
     tibble::as_tibble(.name_repair = "minimal") %>%
-    dplyr::rename("link" := value) %>%  # Use `:=` for renaming
+    dplyr::rename(link = .data$value) %>%
+    #dplyr::rename("link" := value) %>%  # Use `:=` for renaming
     dplyr::filter(grepl("\\.zip$", link)) %>%
     dplyr::mutate(link = ifelse(grepl("^https?://", link), link, paste0(base_url, link))) %>%
     dplyr::pull(link)

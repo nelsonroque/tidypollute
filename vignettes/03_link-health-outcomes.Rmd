@@ -75,7 +75,7 @@ exposure_df <- summarise_exposure(
 ```
 
 ```{r}
-exposure_df
+knitr::kable(exposure_df) %>% kableExtra::kable_paper()
 ```
 
 ------------------------------------------------------------------------
