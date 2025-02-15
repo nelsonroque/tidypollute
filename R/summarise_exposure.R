@@ -91,10 +91,10 @@ summarise_exposure <- function(participants_df,
       )
     ) %>%
     mutate(
-      mean_exposure = mean(exposure_data, na.rm = TRUE),
-      median_exposure = stats::median(exposure_data, na.rm = TRUE),
-      sd_exposure = stats::sd(exposure_data, na.rm = TRUE),
-      n_exposure_records = sum(is.finite(exposure_data), na.rm = TRUE)
+      mean_exposure = ifelse(length(exposure_data) > 0, mean(exposure_data, na.rm = TRUE), NA_real_),
+      median_exposure = ifelse(length(exposure_data) > 0, stats::median(exposure_data, na.rm = TRUE), NA_real_),
+      sd_exposure = ifelse(length(exposure_data) > 0, stats::sd(exposure_data, na.rm = TRUE), NA_real_),
+      n_exposure_records = ifelse(length(exposure_data) > 0, sum(is.finite(exposure_data), na.rm = TRUE), 0)
     ) %>%
     select(!!!syms(group_vars), mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
     ungroup()
