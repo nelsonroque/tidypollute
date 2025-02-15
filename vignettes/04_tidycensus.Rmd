@@ -1,9 +1,9 @@
 ---
-title: "tidypollute, Meet, `tidycensus`"
+title: "04: tidypollute, Meet, `tidycensus`"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tidypollute, Meet, `tidycensus`}
+  %\VignetteIndexEntry{04: tidypollute, Meet, `tidycensus`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

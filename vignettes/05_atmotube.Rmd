@@ -1,9 +1,9 @@
 ---
-title: "Getting Started with the Atmotube Cloud API"
+title: "05: Getting Started with the Atmotube Cloud API"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with the Atmotube Cloud API}
+  %\VignetteIndexEntry{05: Getting Started with the Atmotube Cloud API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -129,6 +129,10 @@ The function validates all parameters before making an API request. If an invali
 This vignette demonstrated how to use the `get_atmotube_data()` function to retrieve air quality data from the Atmotube API efficiently. The function dynamically handles **single requests for short periods** and **batched requests for long periods** to comply with API limits.
 
 For further questions, refer to the Atmotube API documentation or contact support.
+
+## Coming Soon
+
+Support for the Atmocube API. (Q1 2025)
 
 ---
 

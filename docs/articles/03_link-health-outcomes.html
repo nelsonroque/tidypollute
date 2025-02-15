@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
 
 
 
-
+<script src="03_link-health-outcomes_files/kePrint-0.0.1/kePrint.js"></script><link href="03_link-health-outcomes_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Linking to Health Outcomes/Patient Data</h1>
@@ -159,14 +159,115 @@ exposures.</p>
 <span>    n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exposure_df</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
-<span><span class="co">##   participant_id   age smoking_status dementia mean_exposure median_exposure</span></span>
-<span><span class="co">##            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>              1    65 Never                 0       0.006<span style="text-decoration: underline;">23</span>           0.005</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>              3    50 Current               1       0.024<span style="text-decoration: underline;">5</span>            0.01 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>              5    58 Former                1       0.028<span style="text-decoration: underline;">5</span>            0.01 </span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: sd_exposure &lt;dbl&gt;, n_exposure_records &lt;int&gt;</span></span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">exposure_df</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_classic.html" class="external-link">kable_paper</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+<thead><tr>
+<th style="text-align:right;">
+participant_id
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:left;">
+smoking_status
+</th>
+<th style="text-align:right;">
+dementia
+</th>
+<th style="text-align:right;">
+mean_exposure
+</th>
+<th style="text-align:right;">
+median_exposure
+</th>
+<th style="text-align:right;">
+sd_exposure
+</th>
+<th style="text-align:right;">
+n_exposure_records
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.0062301
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+0.0047977
+</td>
+<td style="text-align:right;">
+113
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+Current
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0245161
+</td>
+<td style="text-align:right;">
+0.010
+</td>
+<td style="text-align:right;">
+0.0455451
+</td>
+<td style="text-align:right;">
+62
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:left;">
+Former
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.0284848
+</td>
+<td style="text-align:right;">
+0.010
+</td>
+<td style="text-align:right;">
+0.0608852
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+</tbody>
+</table>
 <hr>
 </div>
 <div class="section level3">

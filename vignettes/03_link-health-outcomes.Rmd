@@ -1,9 +1,9 @@
 ---
-title: "Linking to Health Outcomes/Patient Data"
+title: "03: Linking to Health Outcomes/Patient Data"
 author: "Dr. Nelson Roque"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Linking to Health Outcomes/Patient Data}
+  %\VignetteIndexEntry{03: Linking to Health Outcomes/Patient Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
