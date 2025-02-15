@@ -33,14 +33,16 @@ summarise_exposure(
 
 \item{state_name}{A string specifying the column name in \code{participants_df} and \code{air_quality_df} that contains state names.}
 
-\item{group_vars}{A character vector of additional grouping variables from \code{participants_df} (e.g., participant ID, age, smoking status). Default is \code{NULL}.}
+\item{group_vars}{A character vector of additional grouping variables from \code{participants_df}
+(e.g., participant ID, age, smoking status). Default is \code{NULL}.}
 }
 \value{
-A tibble containing the mean exposure for each participant during their study period.
+A tibble containing the mean, median, and standard deviation of exposure for each
+participant during their study period, along with the number of valid exposure records.
 }
 \description{
-This function calculates the mean exposure to an air pollutant for each participant
-based on their recorded start and end dates.
+This function calculates the mean, median, and standard deviation of exposure
+to an air pollutant for each participant based on their recorded start and end dates.
 }
 \examples{
 library(tidyverse)
@@ -49,8 +51,8 @@ library(tidyverse)
 air_quality_df <- tibble(
   date = seq(as.Date("2000-01-01"), as.Date("2020-12-31"), by = "day"),
   pm25_level = runif(length(date), min = 5, max = 80),
-  county = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
-  state = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
+  county_name = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
+  state_name = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
 )
 
 # Example participants data
@@ -59,8 +61,8 @@ participants_df <- tibble(
   start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
   age = c(65, 72, 50, 60, 58),
-  county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
-  state = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
+  county_name = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
+  state_name = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 )
 
@@ -72,8 +74,8 @@ exposure_results <- summarise_exposure(
   pollutant_col = "pm25_level",
   start_col = "start_date",
   end_col = "end_date",
-  county_name = "county",
-  state_name = "state",
+  county_name = "county_name",
+  state_name = "state_name",
   group_vars = c("participant_id", "age", "smoking_status")
 )
 

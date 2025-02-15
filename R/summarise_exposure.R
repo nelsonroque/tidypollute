@@ -70,12 +70,16 @@ summarise_exposure <- function(participants_df,
                                state_name = "state",
                                group_vars = NULL) {
 
-  if (!(county_name %in% names(air_quality_df))) {
-    stop(glue::glue("Column `{county_name}` not found in `air_quality_df`."))
+  # Ensure necessary columns exist in participants_df
+  missing_cols <- setdiff(c(start_col, end_col, county_name, state_name), names(participants_df))
+  if (length(missing_cols) > 0) {
+    stop(glue::glue("Missing columns in `participants_df`: {paste(missing_cols, collapse = ', ')}"))
   }
 
-  if (!(state_name %in% names(air_quality_df))) {
-    stop(glue::glue("Column `{state_name}` not found in `air_quality_df`."))
+  # Ensure necessary columns exist in air_quality_df
+  missing_cols_air <- setdiff(c(date_col, pollutant_col, county_name, state_name), names(air_quality_df))
+  if (length(missing_cols_air) > 0) {
+    stop(glue::glue("Missing columns in `air_quality_df`: {paste(missing_cols_air, collapse = ', ')}"))
   }
 
   # Rename air quality date column to avoid conflicts
@@ -84,7 +88,7 @@ summarise_exposure <- function(participants_df,
 
   # Ensure start and end dates are properly formatted
   participants_df <- participants_df %>%
-    mutate(across(c(start_col, end_col), as.Date))
+    mutate(across(all_of(c(start_col, end_col)), as.Date))
 
   # Compute exposure per participant
   exposure_df <- participants_df %>%
@@ -93,9 +97,9 @@ summarise_exposure <- function(participants_df,
       exposure_data = list(
         air_quality_df %>%
           filter(
-            air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]],
-            .data[[county_name]] == .env$participant_county,
-            .data[[state_name]] == .env$participant_state
+            air_quality_date >= cur_data()[[start_col]] & air_quality_date <= cur_data()[[end_col]],
+            .data[[county_name]] == cur_data()[[county_name]],
+            .data[[state_name]] == cur_data()[[state_name]]
           ) %>%
           pull(!!sym(pollutant_col))
       )
