@@ -12,7 +12,7 @@ based on their recorded start and end dates."><meta property="og:image" content=
     
     <a class="navbar-brand me-2" href="../index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,6 +66,8 @@ based on their recorded start and end dates.</p>
 <span>  <span class="va">pollutant_col</span>,</span>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
+<span>  <span class="va">county_name</span>,</span>
+<span>  <span class="va">state_name</span>,</span>
 <span>  group_vars <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -94,6 +96,14 @@ based on their recorded start and end dates.</p>
 
 <dt>end_col</dt>
 <dd><p>A string specifying the column name in <code>participants_df</code> that contains the end date.</p></dd>
+
+
+<dt>county_name</dt>
+<dd><p>A string specifying the column name in <code>air_quality_df</code> that contains county names.</p></dd>
+
+
+<dt>state_name</dt>
+<dd><p>A string specifying the column name in <code>air_quality_df</code> that contains state names.</p></dd>
 
 
 <dt>group_vars</dt>
@@ -133,6 +143,8 @@ based on their recorded start and end dates.</p>
 <span class="r-in"><span>  start_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2005-06-01"</span>, <span class="st">"2010-01-01"</span>, <span class="st">"2015-03-15"</span>, <span class="st">"2008-07-10"</span>, <span class="st">"2012-09-20"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  end_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2005-12-31"</span>, <span class="st">"2010-12-31"</span>, <span class="st">"2015-09-30"</span>, <span class="st">"2009-05-20"</span>, <span class="st">"2013-06-15"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">65</span>, <span class="fl">72</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">58</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  county <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CountyA"</span>, <span class="st">"CountyB"</span>, <span class="st">"CountyC"</span>, <span class="st">"CountyA"</span>, <span class="st">"CountyB"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"StateX"</span>, <span class="st">"StateY"</span>, <span class="st">"StateZ"</span>, <span class="st">"StateX"</span>, <span class="st">"State"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  smoking_status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Never"</span>, <span class="st">"Former"</span>, <span class="st">"Current"</span>, <span class="st">"Never"</span>, <span class="st">"Former"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -144,6 +156,8 @@ based on their recorded start and end dates.</p>
 <span class="r-in"><span>  pollutant_col <span class="op">=</span> <span class="st">"pm25_level"</span>,</span></span>
 <span class="r-in"><span>  start_col <span class="op">=</span> <span class="st">"start_date"</span>,</span></span>
 <span class="r-in"><span>  end_col <span class="op">=</span> <span class="st">"end_date"</span>,</span></span>
+<span class="r-in"><span>  county_name <span class="op">=</span> <span class="st">"county"</span>,</span></span>
+<span class="r-in"><span>  state_name <span class="op">=</span> <span class="st">"state"</span>,</span></span>
 <span class="r-in"><span>  group_vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"participant_id"</span>, <span class="st">"age"</span>, <span class="st">"smoking_status"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

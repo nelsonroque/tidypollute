@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidypollute</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@ functional example (pun intended).</p>
 <hr>
 <p>This request receives data from EPA AirData flat files, for
 <strong>analyte</strong> (pollutant) == <code>LEAD</code> over a given
-time range (1999-2000).</p>
+time range (1999-2000), and links it to fake participant data.</p>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Preparing to download:</span></span>
 <span><span class="co">## Analyte: LEAD </span></span>
@@ -125,7 +125,9 @@ exposures.</p>
 <span>  end_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2000-12-31"</span>, <span class="st">"2000-12-31"</span>, <span class="st">"2000-09-30"</span>, <span class="st">"2000-05-20"</span>, <span class="st">"2000-06-15"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">65</span>, <span class="fl">72</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">58</span><span class="op">)</span>,</span>
 <span>  smoking_status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Never"</span>, <span class="st">"Former"</span>, <span class="st">"Current"</span>, <span class="st">"Never"</span>, <span class="st">"Former"</span><span class="op">)</span>,</span>
-<span>  dementia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span>  county <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Kern"</span>, <span class="st">"Miami-Dade"</span>, <span class="st">"Broward"</span>, <span class="st">"Miami-Dade"</span>, <span class="st">"Broward"</span><span class="op">)</span>,</span>
+<span>  state <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"California"</span>, <span class="st">"Florida"</span>, <span class="st">"Florida"</span>, <span class="st">"Florida"</span>, <span class="st">"Florida"</span><span class="op">)</span>,</span>
+<span>  dementia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exposure_df</span></span></code></pre></div>

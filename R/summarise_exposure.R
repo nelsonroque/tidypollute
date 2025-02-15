@@ -13,6 +13,7 @@
 #' @param state_name A string specifying the column name in `air_quality_df` that contains state names.
 #' @param group_vars A character vector of additional grouping variables from `participants_df` (e.g., participant ID, age, smoking status). Default is `NULL`.
 #' @import dplyr
+#' @importFrom stats median sd
 #' @return A tibble containing the mean exposure for each participant during their study period.
 #' @export
 #'
@@ -32,7 +33,7 @@
 #'   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
 #'   age = c(65, 72, 50, 60, 58),
 #'   county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
-#'   state = c("StateX", "StateY", "StateZ", "StateX", "State"),
+#'   state = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
 #'   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 #' )
 #'
@@ -50,6 +51,7 @@
 #' )
 #'
 #' print(exposure_results)
+
 summarise_exposure <- function(participants_df,
                                air_quality_df,
                                date_col,
@@ -77,43 +79,24 @@ summarise_exposure <- function(participants_df,
   air_quality_df <- air_quality_df %>%
     rename(air_quality_date = !!date_col)
 
-  # Perform a proper join and filter based on exposure window
+  # Compute exposure per participant
   exposure_df <- participants_df %>%
-    rowwise() %>% # Ensure filtering happens per participant
-    mutate(mean_exposure = mean(
+    rowwise() %>%
+    mutate(exposure_data = list(
       air_quality_df %>%
-        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
-        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
-        pull(!!pollutant_col),
-      na.rm = TRUE
+        filter(.data$air_quality_date >= !!start_col & .data$air_quality_date <= !!end_col) %>%
+        filter(.data[[as_string(county_name)]] == .env[[as_string(county_name)]],
+               .data[[as_string(state_name)]] == .env[[as_string(state_name)]]) %>%
+        pull(!!pollutant_col)
     )) %>%
-    mutate(median_exposure = median(
-      air_quality_df %>%
-        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
-        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
-        pull(!!pollutant_col),
-      na.rm = TRUE
-    )) %>%
-    mutate(sd_exposure = sd(
-      air_quality_df %>%
-        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
-        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
-        pull(!!pollutant_col),
-      na.rm = TRUE
-    )) %>%
-    mutate(n_exposure_records = sum(
-      (air_quality_df %>%
-        filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
-        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
-        pull(!!pollutant_col)) %>%
-        is.finite(),
-      na.rm = TRUE
-    )) %>%
+    mutate(
+      mean_exposure = mean(exposure_data, na.rm = TRUE),
+      median_exposure = stats::median(exposure_data, na.rm = TRUE),
+      sd_exposure = stats::sd(exposure_data, na.rm = TRUE),
+      n_exposure_records = sum(is.finite(exposure_data), na.rm = TRUE)
+    ) %>%
+    select(!!!group_vars, mean_exposure, median_exposure, sd_exposure, n_exposure_records) %>%
     ungroup()
-
-  # Select relevant columns
-  exposure_df <- exposure_df %>%
-    select(!!!group_vars, .data$mean_exposure, .data$median_exposure, .data$sd_exposure, .data$n_exposure_records)
 
   return(exposure_df)
 }
