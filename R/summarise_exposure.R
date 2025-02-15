@@ -1,7 +1,7 @@
-#' Compute Air Pollutant Exposure for Given Time Windows
+#' Compute Air Pollutant Exposure for Given Time Windows (County-level aggregation)
 #'
 #' This function calculates the mean, median, and standard deviation of exposure
-#' to an air pollutant for each participant based on their recorded start and end dates.
+#' to an air pollutant for each participant based on their recorded start and end dates, and county/state.
 #'
 #' @param participants_df A dataframe containing participant information, including start and end dates.
 #' @param air_quality_df A dataframe containing air quality measurements, with date and pollutant values.

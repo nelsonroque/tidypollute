@@ -2,11 +2,11 @@ pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
-  01_getting-to-know-tidypollute: 01_getting-to-know-tidypollute.html
-  02_easy-request: 02_easy-request.html
-  03_link-health-outcomes: 03_link-health-outcomes.html
-  04_tidycensus: 04_tidycensus.html
-  05_atmotube: 05_atmotube.html
-  06_hexsticker: 06_hexsticker.html
-last_built: 2025-02-15T16:24Z
+  01-getting-to-know-tidypollute: 01-getting-to-know-tidypollute.html
+  02-easy-request: 02-easy-request.html
+  03-link-health-outcomes: 03-link-health-outcomes.html
+  04-tidycensus: 04-tidycensus.html
+  05-atmotube: 05-atmotube.html
+  06-hexsticker: 06-hexsticker.html
+last_built: 2025-02-15T16:29Z
 

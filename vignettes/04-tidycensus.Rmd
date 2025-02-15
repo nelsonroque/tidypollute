@@ -8,8 +8,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Getting Started with `tidypollute` and `tidycensus`
-
 ## Goals of this Notebook
 
 This notebook demonstrates how to **download and stack** EPA AirData files for **2023-2024** focusing on **Ozone (44201)** data, and merge with `tidycensus` information.

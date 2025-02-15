@@ -8,8 +8,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Getting Started with `tidypollute`
-
 ## Goals of this Notebook
 
 Create the original Hex logo for the `tidypollute` package. The logo was revised via a custom illustration but the original logo was made using the `hexSticker` package.

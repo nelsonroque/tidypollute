@@ -8,8 +8,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Getting Started with `tidypollute`
-
 ## Goals of this Notebook
 
 This vignette demonstrates how to use the `get_atmotube_data()` to **download Atmotube data** [via the Atmotube Cloud API](https://app.swaggerhub.com/apis-docs/Atmotube/cloud_api/1.4) using the `tidypollute` package.

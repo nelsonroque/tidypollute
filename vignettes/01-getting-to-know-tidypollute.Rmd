@@ -8,8 +8,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# tidypollute: Getting to Know the Package
-
 ## Goals of this Notebook
 
 This notebook orients you to `tidypollute` functions in a functional example (pun intended).
