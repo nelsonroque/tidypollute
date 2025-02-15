@@ -7,6 +7,16 @@ library(tidyverse)
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# Define the URL for the EPA AirData download page
+url <- "https://aqs.epa.gov/aqsweb/airdata/download_files.html"
+
+# Read the webpage and parse HTML content
+webpage <- rvest::read_html(url)
+
+# TODO: cache webpage!
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 # Create the tibble
 us_states <- tibble(
   state_name = state.name,
@@ -38,8 +48,7 @@ epa_airdata_monitoring_sites = epa_airdata_links %>%
   filter(analyte == "sites") %>%
   tidypollute::download_stack_epa_airdata(clean_names = F)
 
-epa_analyte_codes = tibble::tibble(analyte = tidypollute::get_epa_airdata_analyte_codes() %>%
-  setdiff(c("sites", "monitors")))
+epa_analyte_codes = readr::read_csv(".internal/epa_airdata_lookup_table.csv")
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

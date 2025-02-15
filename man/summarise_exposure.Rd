@@ -29,9 +29,9 @@ summarise_exposure(
 
 \item{end_col}{A string specifying the column name in \code{participants_df} that contains the end date.}
 
-\item{county_name}{A string specifying the column name in \code{air_quality_df} that contains county names.}
+\item{county_name}{A string specifying the column name in \code{participants_df} and \code{air_quality_df} that contains county names.}
 
-\item{state_name}{A string specifying the column name in \code{air_quality_df} that contains state names.}
+\item{state_name}{A string specifying the column name in \code{participants_df} and \code{air_quality_df} that contains state names.}
 
 \item{group_vars}{A character vector of additional grouping variables from \code{participants_df} (e.g., participant ID, age, smoking status). Default is \code{NULL}.}
 }
@@ -48,7 +48,9 @@ library(tidyverse)
 # Example air quality data (PM2.5 levels)
 air_quality_df <- tibble(
   date = seq(as.Date("2000-01-01"), as.Date("2020-12-31"), by = "day"),
-  pm25_level = runif(length(date), min = 5, max = 80)
+  pm25_level = runif(length(date), min = 5, max = 80),
+  county = rep(c("CountyA", "CountyB", "CountyC"), length.out = length(date)),
+  state = rep(c("StateX", "StateY", "StateZ"), length.out = length(date))
 )
 
 # Example participants data

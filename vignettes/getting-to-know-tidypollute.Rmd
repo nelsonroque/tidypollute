@@ -22,11 +22,18 @@ This request receives data from EPA AirData flat files, for **analyte** (polluta
 library(tidypollute)
 ```
 
+## Get Analyte Codes
 ```{r}
-possible_analytes = tidypollute::epa_analyte_codes$analyte
-possible_analytes
+possible_analytes = tidypollute::epa_analyte_codes
 ```
 
+## Get Zip Links for all Files
+```{r}
+epa_zip_links <- get_epa_airdata_zip_links()
+head(epa_zip_links)
+```
+
+## Get Data: Lead, from 1999-2000
 ```{r, message=F, warning=F, echo=T}
 lead <- get_epa_airdata(analyte = "LEAD", 
                         start_year = 1999, 

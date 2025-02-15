@@ -85,7 +85,8 @@ summarise_exposure <- function(participants_df,
       participant_state = .data[[state_name]],
       exposure_data = list(
         air_quality_df %>%
-          filter(air_quality_date >= .data[[start_col]] & air_quality_date <= .data[[end_col]]) %>%
+          filter(air_quality_date >= .data[[as_string(sym(start_col))]] &
+                   air_quality_date <= .data[[as_string(sym(end_col))]]) %>%
           filter(.data[[county_name]] == participant_county & .data[[state_name]] == participant_state) %>%
           pull(!!sym(pollutant_col))
       )
