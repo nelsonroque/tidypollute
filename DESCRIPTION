@@ -23,7 +23,7 @@ Imports:
     rlang
 Suggests:
     kable,
-    kableExtra
+    kableExtra,
     sf,
     tidycensus,
     lubridate,
