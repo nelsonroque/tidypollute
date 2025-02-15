@@ -16,7 +16,7 @@ This notebook orients you to `tidypollute` functions in a functional example (pu
 
 ------------------------------------------------------------------------
 
-This request receives data from EPA AirData flat files, for **analyte** (pollutant) == `LEAD` over a given time range (1999-2000).
+This request receives data from EPA AirData flat files, for **analyte** (pollutant) == `LEAD` over a given time range (1999-2000), and links it to fake participant data.
 
 ```{r, message=F, warning=F, echo=F}
 library(tidypollute)

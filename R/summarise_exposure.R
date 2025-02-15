@@ -9,8 +9,10 @@
 #' @param pollutant_col A string specifying the column name in `air_quality_df` that contains pollutant values.
 #' @param start_col A string specifying the column name in `participants_df` that contains the start date.
 #' @param end_col A string specifying the column name in `participants_df` that contains the end date.
+#' @param county_name A string specifying the column name in `air_quality_df` that contains county names.
+#' @param state_name A string specifying the column name in `air_quality_df` that contains state names.
 #' @param group_vars A character vector of additional grouping variables from `participants_df` (e.g., participant ID, age, smoking status). Default is `NULL`.
-#'
+#' @import dplyr
 #' @return A tibble containing the mean exposure for each participant during their study period.
 #' @export
 #'
@@ -29,6 +31,8 @@
 #'   start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
 #'   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
 #'   age = c(65, 72, 50, 60, 58),
+#'   county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
+#'   state = c("StateX", "StateY", "StateZ", "StateX", "State"),
 #'   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 #' )
 #'
@@ -40,6 +44,8 @@
 #'   pollutant_col = "pm25_level",
 #'   start_col = "start_date",
 #'   end_col = "end_date",
+#'   county_name = "county",
+#'   state_name = "state",
 #'   group_vars = c("participant_id", "age", "smoking_status")
 #' )
 #'
@@ -50,14 +56,17 @@ summarise_exposure <- function(participants_df,
                                pollutant_col,
                                start_col,
                                end_col,
+                               county_name,
+                               state_name,
                                group_vars = NULL) {
-  library(dplyr)
 
   # Convert column names to symbols
   date_col <- sym(date_col)
   pollutant_col <- sym(pollutant_col)
   start_col <- sym(start_col)
   end_col <- sym(end_col)
+  county_name <- sym(county_name)
+  state_name <- sym(state_name)
 
   # Ensure group_vars is a character vector
   if (!is.null(group_vars)) {
@@ -74,24 +83,28 @@ summarise_exposure <- function(participants_df,
     mutate(mean_exposure = mean(
       air_quality_df %>%
         filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
         pull(!!pollutant_col),
       na.rm = TRUE
     )) %>%
     mutate(median_exposure = median(
       air_quality_df %>%
         filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
         pull(!!pollutant_col),
       na.rm = TRUE
     )) %>%
     mutate(sd_exposure = sd(
       air_quality_df %>%
         filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
         pull(!!pollutant_col),
       na.rm = TRUE
     )) %>%
     mutate(n_exposure_records = sum(
       (air_quality_df %>%
         filter(air_quality_date >= !!start_col & air_quality_date <= !!end_col) %>%
+        filter(!!county_name == !!county_name & !!state_name == !!state_name) %>%
         pull(!!pollutant_col)) %>%
         is.finite(),
       na.rm = TRUE
@@ -100,7 +113,7 @@ summarise_exposure <- function(participants_df,
 
   # Select relevant columns
   exposure_df <- exposure_df %>%
-    select(!!!group_vars, mean_exposure, median_exposure, sd_exposure, n_exposure_records)
+    select(!!!group_vars, .data$mean_exposure, .data$median_exposure, .data$sd_exposure, .data$n_exposure_records)
 
   return(exposure_df)
 }
