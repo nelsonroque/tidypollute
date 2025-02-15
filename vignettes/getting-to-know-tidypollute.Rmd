@@ -23,7 +23,7 @@ library(tidypollute)
 ```
 
 ```{r}
-possible_analytes = get_epa_airdata_analyte_codes()
+possible_analytes = tidypollute::epa_analyte_codes$analyte
 possible_analytes
 ```
 

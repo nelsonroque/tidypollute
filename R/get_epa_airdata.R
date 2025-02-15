@@ -41,8 +41,14 @@
 #'
 #' @export
 get_epa_airdata <- function(analyte, start_year, end_year, freq, output_dir = "data/", prompt_download=F, archive=FALSE, archive_id=NULL) {
+  `%nin%` <- Negate("%in%")
+
   if (missing(analyte) || missing(start_year) || missing(end_year) || missing(freq)) {
     stop("All parameters must be specified: analyte, start_year, end_year, and freq")
+  }
+
+  if(analyte %nin% tidypollute::epa_analyte_codes$analyte) {
+    stop("Invalid analyte code. Please check the available analyte codes by running `tidypollute::epa_analyte_codes$analyte`.")
   }
 
   # Validate and create output directory if it doesn't exist
