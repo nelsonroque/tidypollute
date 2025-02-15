@@ -6,11 +6,15 @@ template:
 reference:
 - title: Package Functions and Datasets
 - subtitle: Functions
-  desc: Functions for data access.
+  desc: Functions for EPA AirData access.
 - contents:
-  - starts_with("get")
+  - starts_with("get_epa")
   - starts_with("download")
   - starts_with("summarise")
+- subtitle: Atmotube Functions
+  desc: Functions for Atmotube access.
+- contents:
+  - starts_with("get_atmo")
 - subtitle: EPA Datasets
   desc: Built-in EPA datasets for easy usage.
   contents:
