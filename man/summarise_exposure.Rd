@@ -11,6 +11,8 @@ summarise_exposure(
   pollutant_col,
   start_col,
   end_col,
+  county_name,
+  state_name,
   group_vars = NULL
 )
 }
@@ -26,6 +28,10 @@ summarise_exposure(
 \item{start_col}{A string specifying the column name in \code{participants_df} that contains the start date.}
 
 \item{end_col}{A string specifying the column name in \code{participants_df} that contains the end date.}
+
+\item{county_name}{A string specifying the column name in \code{air_quality_df} that contains county names.}
+
+\item{state_name}{A string specifying the column name in \code{air_quality_df} that contains state names.}
 
 \item{group_vars}{A character vector of additional grouping variables from \code{participants_df} (e.g., participant ID, age, smoking status). Default is \code{NULL}.}
 }
@@ -51,6 +57,8 @@ participants_df <- tibble(
   start_date = as.Date(c("2005-06-01", "2010-01-01", "2015-03-15", "2008-07-10", "2012-09-20")),
   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
   age = c(65, 72, 50, 60, 58),
+  county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
+  state = c("StateX", "StateY", "StateZ", "StateX", "State"),
   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 )
 
@@ -62,6 +70,8 @@ exposure_results <- summarise_exposure(
   pollutant_col = "pm25_level",
   start_col = "start_date",
   end_col = "end_date",
+  county_name = "county",
+  state_name = "state",
   group_vars = c("participant_id", "age", "smoking_status")
 )
 
