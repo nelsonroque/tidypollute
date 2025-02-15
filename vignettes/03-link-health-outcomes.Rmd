@@ -30,7 +30,7 @@ lead <- get_epa_airdata(
 
 This is sample participant data, where you have a de-identified `participant_id`, other variables (`age`, `smoking_status`, and `dementia` status), and a set of dates for which to compute exposures within (`start_date`, `end_date`). If you need to compute many windows for a given participant, the idea would be to have as many rows in participants_df as you need data lookups for computing exposures.
 
-```{r, msg=F, warning=F}
+```{r, message=F, warning=F}
 library(dplyr)
 participants_df <- tibble::tibble(
   participant_id = 1:5,
@@ -44,7 +44,7 @@ participants_df <- tibble::tibble(
 )
 ```
 
-```{r}
+```{r, message=F, warning=F}
 # manually compute for kern county for participant 1
 p1_test = lead %>%
   dplyr::filter(county_name == "Kern") %>%
@@ -58,7 +58,11 @@ p1_test = lead %>%
 
 ```
 
-```{r, echo=F, message=F, warning=F}
+```{r}
+knitr::kable(p1_test) %>% kableExtra::kable_paper()
+```
+
+```{r, message=F, warning=F}
 exposure_df <- summarise_exposure(
   participants_df = participants_df,
   air_quality_df = lead,
