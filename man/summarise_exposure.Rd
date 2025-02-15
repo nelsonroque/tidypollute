@@ -58,7 +58,7 @@ participants_df <- tibble(
   end_date = as.Date(c("2005-12-31", "2010-12-31", "2015-09-30", "2009-05-20", "2013-06-15")),
   age = c(65, 72, 50, 60, 58),
   county = c("CountyA", "CountyB", "CountyC", "CountyA", "CountyB"),
-  state = c("StateX", "StateY", "StateZ", "StateX", "State"),
+  state = c("StateX", "StateY", "StateZ", "StateX", "StateY"),
   smoking_status = c("Never", "Former", "Current", "Never", "Former")
 )
 

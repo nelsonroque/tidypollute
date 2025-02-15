@@ -45,8 +45,8 @@
 #'   pollutant_col = "pm25_level",
 #'   start_col = "start_date",
 #'   end_col = "end_date",
-#'   county_name = "county",
-#'   state_name = "state",
+#'   county_name = "county_name",
+#'   state_name = "state_name",
 #'   group_vars = c("participant_id", "age", "smoking_status")
 #' )
 #'
@@ -58,8 +58,8 @@ summarise_exposure <- function(participants_df,
                                pollutant_col,
                                start_col,
                                end_col,
-                               county_name,
-                               state_name,
+                               county_name="county_name",
+                               state_name="state_name",
                                group_vars = NULL) {
 
   # Convert column names to symbols
@@ -85,8 +85,8 @@ summarise_exposure <- function(participants_df,
     mutate(exposure_data = list(
       air_quality_df %>%
         filter(.data$air_quality_date >= !!start_col & .data$air_quality_date <= !!end_col) %>%
-        filter(.data[[as_string(county_name)]] == .env[[as_string(county_name)]],
-               .data[[as_string(state_name)]] == .env[[as_string(state_name)]]) %>%
+        filter(.data[[as_string(county_name)]] == cur_data()[[as_string(county_name)]],
+               .data[[as_string(state_name)]] == cur_data()[[as_string(state_name)]]) %>%
         pull(!!pollutant_col)
     )) %>%
     mutate(
