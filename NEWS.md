@@ -1,5 +1,3 @@
-# tidypollute 0.1.6
-
 # tidypollute 0.1.5
 
 ## Improvements

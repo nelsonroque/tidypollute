@@ -92,12 +92,17 @@ Thank you, Karishma Christmas, for your documentation support.
 ---
 
 🌎 **More Resources:**  
-📌 [EPA AQS API Docs](https://aqs.epa.gov/aqsweb/documents/data_api.html)  
-📌 [EPA Daily Air Quality Reports](https://www.epa.gov/outdoor-air-quality-data/air-data-daily-air-quality-tracker-pdf-report)  
-📌 [Census Reference Files](https://www.census.gov/geographies/reference-files.html)  
-📌 [Census GEOIDs](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)
-📌 [AQI Colors](https://www.airnow.gov/aqi/aqi-basics/)
+📌 [EPA AQS API Docs](https://aqs.epa.gov/aqsweb/documents/data_api.html) 
+
+📌 [EPA Daily Air Quality Reports](https://www.epa.gov/outdoor-air-quality-data/air-data-daily-air-quality-tracker-pdf-report) 
+
+📌 [EPA AQI Colors](https://www.airnow.gov/aqi/aqi-basics/)
+
 📌 [EPA Air Quality Webcams](https://www.airnow.gov/resources/web-cams/)
+
+📌 [Census Reference Files](https://www.census.gov/geographies/reference-files.html)
+
+📌 [Census GEOIDs](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html)
 
 ---
 
@@ -105,5 +110,5 @@ Ready to make sense of air quality data the **tidy way**? 🌱 Let's go! 🚀
 
 ---
 
-Anyone want to help with the logo?
+Anyone want to help with the logo? :)
 https://www.canva.com/design/DAGfIpmrLEA/Z0-kZNH66JDBZgp0PIlfMw/edit
