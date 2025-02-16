@@ -19,7 +19,6 @@
 # Ignoring specific file types within docs
 ^docs/.*\.Rmd$     # R Markdown files inside docs
 ^docs/.*\.html$    # HTML files inside docs
-^inst/doc/.*\.(Rmd|html)$
 
 # CRAN-related files
 ^cran-comments\.md$  # CRAN submission comments
